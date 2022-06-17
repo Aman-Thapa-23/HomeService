@@ -1,0 +1,23 @@
+{% if messages %}
+<div class="messages" id="messages">
+  {% for message in messages %}
+  <div {% if message.tags %} class="alert alert-sm alert-dismissible alert-{{ message.tags }}" id="alert" {% endif %}>
+    {{ message }}
+    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="align-items: flex-end; position: absolute;">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <script type="text/javascript">
+
+    window.addEventListener('DOMContentLoaded', (event)=> {
+      setTimeout(function () {
+
+// Closing the alert
+$('.alert').alert('close');
+}, 5000);
+    });
+    
+</script>
+  {% endfor %}
+</div>
+{% endif %}

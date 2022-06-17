@@ -1,0 +1,130 @@
+{% extends 'auth_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    .divider:after,
+    .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+    }
+
+    label{
+        font-size: 20px;
+        margin-bottom: 2px;    
+    }
+</style>
+<div class="row">
+    <div class="col">
+
+    </div>
+
+</div>
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="{% static 'images/Register.png' %}"
+                    class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <h2 class="mb-5" style="text-align: center;">Sign Up As Customer</h2><hr>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% include 'messages.html' %}
+
+
+                    {{form|crispy}}
+                    <!-- <div class="form-outline mb-3">
+                        <label for="">Full Name</label>
+                        <input class="form-control form-control-lg" name="name" type="text"
+                            placeholder="Enter Your Full Name">
+                    </div>
+                    <div class="form-outline mb-3">
+                        <label for="">Email</label>
+                        <input class="form-control form-control-lg" name="email" type="email"
+                            placeholder="name@gmail.com">
+                    </div>
+                    <div class="form-outline mb-3">
+                        <label for="">Phone Number</label>
+                        <input class="form-control  form-control-lg" type="text" name="phone_number"
+                            placeholder="Your Mobile Number">
+                    </div>
+                    <div class="form-outline mb-3">
+                        <label for="">Address</label>
+                        <input class="form-control  form-control-lg" name="address" type="text"
+                            placeholder="Enter Address">
+                    </div>
+                     <div class="form-outline mb-3">
+                        <label for="">Your Work Type</label>
+                       <select class="form-control form-control-lg" name="role" id="">
+                        <option value="{{ form.category_name }}"></option>
+                       </select>
+                    </div> -->
+                    <!-- Experience -->
+                    <!-- <div class="form-outline mb-3">
+                        <label for="">Type of Work</label>
+                        <input class="form-control  form-control-lg" type="text" name="experience"
+                            placeholder="Your Working Experience" value="{{ fieldvalues.experience }}">
+                    </div> -->
+                    <!-- Experience -->
+                    <!-- <div class="form-outline mb-3">
+                        <label for="">Experience</label>
+                        <input class="form-control  form-control-lg" type="text" name="experience"
+                            placeholder="Your Working Experience" value="{{ fieldvalues.experience }}">
+                    </div> -->
+                    <!-- id proof -->
+                    <!-- <div class="form-outline mb-3">
+                        <label for="">ID Type</label>
+                        <input class="form-control  form-control-lg" name="id_proof" type="text"
+                            placeholder="Choose Your ID Type" value="{{ fieldvalues.id_proof }}">
+                    </div> -->
+                    <!-- id proof image -->
+                    <!-- <div class="form-outline mb-3">
+                        <label for="">ID Picture</label>
+                        <input class="form-control  form-control-lg" name="id_image" type="file"
+                            placeholder="Choose ID Image" value="{{ fieldvalues.id_image }}">
+                    </div> -->
+                    <!-- Profile Picture -->
+                    <!-- <div class="form-outline mb-3">
+                        <label for="">Profile Picture</label>
+                        <input class="form-control  form-control-lg" type="file" name="profile_image"
+                            placeholder="Upload Your Photo" value="{{ fieldvalues.profile_image }}">
+                    </div> -->
+
+                    <!-- Password -->
+                    <!-- <div class="form-outline mb-3">
+                        <label for="">Password</label>
+                        <input class="form-control  form-control-lg" name="password" type="password"
+                            placeholder="Set Password">
+                    </div>
+                    <div class="form-outline mb-3">
+                        <label for="">Confirm Password</label>
+                        <input class="form-control  form-control-lg" name="confirm_password" type="password"
+                            placeholder="Set Password">
+                    </div> -->
+                    <input type="submit" class="btn btn-block btn-lg submit-btn mt-5" style="width: 100%; background-color: #e55c28;"
+                        value="Register">
+                     <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                    </div>
+
+                    <!-- <a class="btn btn-primary btn-lg btn-block mt-2" style="background-color: #3b5998; width: 100%;"
+                        href="#!" role="button">
+                        <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
+                    </a>
+                    <a class="btn btn-primary btn-lg btn-block mt-2" style="background-color: #55acee; width: 100%;"
+                        href="#!" role="button">
+                        <i class="fab fa-twitter me-2"></i>Continue with Twitter</a> -->
+                </form> 
+                <div class="container mt-4 ms-4 mb-lg-4" style="text-align: center;">
+                    <span class="">Already have an account?<a href="{% url 'authentication:login' %}"> Sign
+                            in</a></span><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

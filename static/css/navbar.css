@@ -1,0 +1,22 @@
+.navbar {
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    background-color: rgb(245, 245, 245);
+}
+.nav-item{
+text-align: justify;
+display: inline-block;
+font-size: 20px;
+}
+
+.nav-link{
+color: black;
+}
+
+.nav-item a:hover{
+color: #e55c28;
+}
