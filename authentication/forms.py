@@ -30,6 +30,18 @@ class WorkerSignUpForm(UserCreationForm):
         for field_name in ('name', 'email', 'password1', 'password2'):
             self.fields[field_name].help_text = ''
 
+class CustomUserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser    
+        fields= ('name','phone_number', 'address', 'profile_image')
+
+
+class WorkerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Worker
+        fields = ('experience','id_proof', 'id_image')
+
+
 class CustomerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser    

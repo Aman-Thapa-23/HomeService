@@ -1,3 +1,6 @@
+from contextlib import nullcontext
+from email.policy import default
+from pyexpat import model
 from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
@@ -41,7 +44,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email_address'), max_length=254, unique=True)
     phone_number = models.CharField(max_length=20, unique=True)
     address = models.CharField(max_length=100)
-    profile_image = models.ImageField(null=True, blank=True, upload_to='profile_image')
+    profile_image = models.ImageField(default='default-profile-image.jpg', upload_to='profile_image')
     is_customer = models.BooleanField(default=False)
     is_worker = models.BooleanField(default=False)
 
@@ -63,6 +66,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class WorkerCategory(models.Model):
     category_name = models.CharField(max_length=50, unique=True)
+    service_picture = models.ImageField(null=True, blank=True, upload_to="service_image")
 
     def __str__(self):
         return f'{self.category_name}'

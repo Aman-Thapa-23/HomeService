@@ -21,10 +21,12 @@
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/cloud-font-awesome.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/fontawesome.all.css' %}">
+
   <!-- navbar css -->
-
-
   <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+  <!-- landing page css -->
+  <link rel="stylesheet" href="{% static 'css/landing-page.css' %}">
 
   <!-- js -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" defer
@@ -41,41 +43,6 @@
   <script src="{% static 'js/popper4.min.js' %}" defer></script>
   <script src="{% static 'js/bootstrap4.min.js' %}" defer></script>
 </head>
-<style>
-  .carousel-inner {
-    height: 30rem;
-
-  }
-
-  .carousel-image-one img {
-    margin-left: 16rem;
-    height: 20rem;
-    margin-bottom: 10rem;
-  }
-
-  .carousel-image-two img {
-    margin-left: 20rem;
-    height: 20rem;
-    margin-bottom: 10rem;
-  }
-
-  .carousel-image-three img {
-    margin-left: 28rem;
-    align-items: center;
-    height: 20rem;
-    margin-bottom: 10rem;
-  }
-
-  .service-image{
-    border-radius: 50%;
-    background-color: #e55c28;
-    transition: 0.3s all ease-in-out;
-    margin-bottom: 8px;
-  }
-  .service-image:hover{
-    transform: scale(1.2);
-  }
-</style>
 
 <body>
   <header>
@@ -134,32 +101,180 @@
     <!-- This is the Booking Container of Landing Page -->
     <div class="container">
       <hr>
-      <h4 class="mt-5 mb-5 text-center">Book Now</h4>
+      <h3 class="mt-5 mb-5 text-center" style="color: #e55c28;"><strong>BOOK NOW</strong></h3>
       <div class="row text-center m-4">
-        <div class="col-lg-4">
-          <img class="service-image" src="{% static 'images/services/Plumber.png' %}" width="140" height="140" alt="">
-          <h2>Plumbing</h2>
-          <p>Some representative placeholder content for the three columns of text below the carousel. This is the first
-            column.</p>
-          <p><a class="btn btn-secondary" href="#">View details »</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img class="service-image" src="{% static 'images/services/Painter.png' %}" width="140" height="140" alt="">
-
-          <h2>Painter</h2>
-          <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.
-          </p>
-          <p><a class="btn btn-secondary" href="#">View details »</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img class="service-image" src="{% static 'images/services/Electrician.png' %}" width="140" height="140" alt="">
-          <h2>Electrician</h2>
-          <p>And lastly this, the third column of representative placeholder content.</p>
-          <p><a class="btn btn-secondary" href="#">View details »</a></p>
-        </div><!-- /.col-lg-4 -->
+        <div class="flex row">
+          {% for service in services %}
+          <div class="service col-lg-4">
+            <a href="{% url 'service:worker-list' service.id %}"><img class="service-image" src="{{ service.service_picture.url }}" width="140" height="140" alt=""></a>
+            <h4>{{ service.category_name }}</h4>
+          </div>
+          {% endfor %}
+          <!-- <div class="service col-lg-4">
+            <img class="service-image" src="{% static 'images/services/Plumber.png' %}" width="140" height="140" alt="">
+            <h3>Plumbing</h3>
+          </div>
+          <div class="service col-lg-4">
+            <img class="service-image" src="{% static 'images/services/Painter.png' %}" width="140" height="140" alt="">
+            <h3>Painter</h3>
+          </div>
+          <div class="service col-lg-4">
+            <img class="service-image" src="{% static 'images/services/Electrician.png' %}" width="140" height="140"
+              alt="">
+            <h3>Electrician</h3>
+          </div>
+          <div class="service col-lg-4">
+            <img class="service-image" src="{% static 'images/services/Carpenter.png' %}" width="140" height="140"
+              alt="">
+            <h3>Carpentry</h3>
+          </div>
+          <div class="service col-lg-4">
+            <img class="service-image" src="{% static 'images/services/Gardener.png' %}" width="140" height="140"
+              alt="">
+            <h3>Gardening</h3>
+          </div>
+          <div class="service col-lg-4">
+            <img class="service-image" src="{% static 'images/services/HomeCleaner.png' %}" width="140" height="140"
+              alt="">
+            <h3>Home Cleaner</h3>
+          </div> -->
+        </div>
       </div>
     </div>
     <!-- End of the booking Container of the landing page -->
+
+    <!-- Why Home Servie -->
+    <div class="container">
+      <hr>
+      <div class="row">
+        <h3 class="mt-5 mb-5 text-center" style="color: #e55c28;"><strong>WHY HOME SERVICE?</strong></h3>
+        <div class="col-1">
+
+        </div>
+        <!-- left side -->
+        <div class="col-6">
+          <div class="row mt-lg-5">
+            <div class="col-3">
+              <img src="{% static 'images/sidelogos/seo.png' %}" style="height: 60px; width: 60px;" alt="">
+            </div>
+            <div class="col-9">
+              <h4>Transparent Pricing</h4>
+              <p>See fixed prices and get prior estimates.</p>
+            </div>
+          </div>
+          <div class="row mt-lg-5">
+            <div class="col-3">
+              <img src="{% static 'images/sidelogos/approve.png' %}" style="height: 60px; width: 60px;" alt="">
+            </div>
+            <div class="col-9">
+              <h4>Varified Experts</h4>
+              <p>Experienced experts with background checked.</p>
+            </div>
+          </div>
+          <div class="row mt-lg-5">
+            <div class="col-3">
+              <img src="{% static 'images/sidelogos/badge.png' %}" style="height: 60px; width: 60px;" alt="">
+            </div>
+            <div class="col-9">
+              <h4>Service Warrenty</h4>
+              <p>3 days of service warrenty</p>
+            </div>
+          </div>
+          <div class="row mt-lg-5">
+            <div class="col-3">
+              <img src="{% static 'images/sidelogos/professionalService.png' %}" style="height: 60px; width: 60px;"
+                alt="">
+            </div>
+            <div class="col-9">
+              <h4>Professional Support</h4>
+              <p>We are always with you whenever you need us.</p>
+            </div>
+          </div>
+          <!-- left side end -->
+          <!-- Right side -->
+        </div>
+        <div class="col-4">
+          <img src="{% static 'images/SidePic.png' %}" style="height: 20rem; width: 30rem; margin-top: 6rem;" alt="">
+        </div>
+        <!-- Right side end -->
+        <div class="col-1">
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- End of why home servic -->
+
+
+    <!-- How Home Service Works -->
+    <div class="container">
+      <hr>
+      <div class="row">
+        <h3 class="mt-5 mb-xl-5 text-center" style="color: #e55c28;"><strong>HOW HOME SERVICE WORKS</strong></h3>
+        <div class="col col-1">
+
+        </div>
+        <div class="col col-10 d-flex mt-5">
+          <div class="col-2">
+            <div class="image mb-4">
+              <img src="{% static 'images/how_works/search-workers.png' %}" style="height: 60px; width: 60px; margin-left: 50px;" alt="">
+            </div>
+            <div class="text-center header-and-paragraph">
+              <h5>Select service</h5>
+            </div>
+            <p>Select your preferred service, and search for the worker</p>
+          </div>
+          <i class="fas fa-arrow-right" style="margin-left:10px; margin-top: 20px;"></i>
+          <div class="col-2 ms-xl-4">
+            <div class="image mb-4">
+              <img src="{% static 'images/how_works/select-worker.png' %}" style="height: 60px; width: 60px; margin-left: 50px;" alt="">
+            </div>
+            <div class="text-center header-and-paragraph">
+              <h5>Select worker</h5>
+            </div>
+            <p>Select your preferred service, and search for the worker</p>
+          </div>
+          <i class="fas fa-arrow-right" style="margin-left:10px; margin-top: 20px;"></i>
+          <div class="col-2 ms-xl-4">
+            <div class="image mb-4">
+              <img src="{% static 'images/how_works/booking.png' %}" style="height: 60px; width: 60px; margin-left: 50px;" alt="">
+            </div>
+            <div class="text-center header-and-paragraph">
+              <h5>Book worker</h5>
+            </div>
+            <p>Select your preferred service, and search for the worker</p>
+          </div>
+          <i class="fas fa-arrow-right" style="margin-left:10px; margin-top: 20px;"></i>
+          <div class="col-2 ms-xl-4">
+            <div class="image mb-4">
+              <img src="{% static 'images/how_works/done.png' %}" style="height: 60px; width: 60px; margin-left: 50px;" alt="">
+            </div>
+            <div class="text-center header-and-paragraph">
+              <h5>Booking done</h5>
+            </div>
+            <p>Select your preferred service, and search for the worker</p>
+          </div>
+          <i class="fas fa-arrow-right" style="margin-left:10px; margin-top: 20px;"></i>
+          <div class="col-2 ms-xl-4">
+            <div class="image mb-4">
+              <img src="{% static 'images/how_works/warrenty.png' %}" style="height: 60px; width: 60px; margin-left: 40px;" alt="">
+            </div>
+            <div class="text-center header-and-paragraph">
+              <h5>Get warrenty</h5>
+            </div>
+            <p>Select your preferred service, and search for the worker</p>
+          </div>
+          <div class="col col-1">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- How Home Service Works end -->
 </body>
+<footer>
+  {% include 'footer.html' %} 
+</footer>
 
 </html>

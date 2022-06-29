@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # custom apps
     'django_extensions',
     'authentication',
     'crispy_forms',
+    'service',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +129,8 @@ USE_TZ = True
 
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
+
+LOGIN_URL = 'login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

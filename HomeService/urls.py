@@ -17,13 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from authentication.views import landingPage,LoggedInDashboard
+from service.views import landingPage,LoggedInDashboard, about
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('authentication/', include('authentication.urls', namespace='authentication')),
     path('', landingPage, name='landing-page'),
-    path('dashboard/', LoggedInDashboard, name='dashboard')
+    path('dashboard/', LoggedInDashboard, name='dashboard'),
+    path('about', about, name='about'),
+    path('service/', include('service.urls', namespace='service'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

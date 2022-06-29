@@ -8228,7 +8228,8 @@ h1, h2, h3, h4, h5,
     #sidebar.active ul.components li {
       font-size: 14px; }
       #sidebar.active ul.components li a {
-        padding: 10px 0; }
+        padding: 10px 0;}
+        
         #sidebar.active ul.components li a span {
           margin-right: 0;
           display: block;
@@ -8277,7 +8278,9 @@ h1, h2, h3, h4, h5,
           #sidebar ul li a span {
             display: block; } }
       #sidebar ul li a:hover {
-        color: #fff; }
+        color: #fff;
+        box-shadow: 3px 3px white;
+        transform: scale(1.1); }
     #sidebar ul li.active > a {
       background: transparent;
       color: #fff; }

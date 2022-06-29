@@ -1,0 +1,41 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    .avatar {
+        width: 200px;
+        height: 200px;
+    }
+</style>
+
+<div class="container mt-md-4">
+    <h1 style="color: #e55c28;">Your Profile</h1>
+    <hr>
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-3">
+            <div class="text-center">
+                <img src="{{ user.profile_image.url }}" class="avatar img-circle img-thumbnail" alt="">
+                <h3 class="card-title">{{ user.name }}</h3>
+                <p class="text-secondary">{{ user.email }}</p>
+                <p class="text-secondary">I am a {{ user.worker.category_name }}</p>
+            </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% include 'messages.html' %}
+                {{ cu_form|crispy }}
+                {{ w_form|crispy }}
+                <div class="form-group mt-4">
+                    <button class="btn btn-outline-success" type="submit">Update</button>
+                    <a type="button" class="btn btn-outline-danger" href="{% url 'dashboard' %}">close</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

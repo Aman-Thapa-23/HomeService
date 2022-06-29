@@ -1,0 +1,19 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h3 class="mt-5 mb-5 text-center" style="color: #e55c28;"><strong>BOOK NOW</strong></h3>
+    <div class="row text-center m-4">
+        <div class="flex row">
+            {% for service in services %}
+            <div class="service col-lg-4">
+                <a href="{% url 'service:worker-list' service.id %}"><img class="service-image"
+                        src="{{ service.service_picture.url }}" width="140" height="140" alt=""></a>
+                <h4>{{ service.category_name }}</h4>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,43 @@
+.carousel-inner {
+    height: 30rem;
+
+  }
+
+  .carousel-image-one img {
+    margin-left: 16rem;
+    height: 20rem;
+    margin-bottom: 10rem;
+  }
+
+  .carousel-image-two img {
+    margin-left: 20rem;
+    height: 20rem;
+    margin-bottom: 10rem;
+  }
+
+  .carousel-image-three img {
+    margin-left: 28rem;
+    align-items: center;
+    height: 20rem;
+    margin-bottom: 10rem;
+  }
+
+  .service-image {
+    border-radius: 50%;
+    transition: 0.3s all ease-in-out;
+    margin-bottom: 8px;
+  }
+
+  .service-image:hover {
+    transform: scale(1.2);
+    background-color: #e55c28;
+  }
+
+  h2 {
+    color: black;
+    font-family: sans-serif;
+  }
+
+  .service {
+    margin-top: 20px;
+  }

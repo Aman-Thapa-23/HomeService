@@ -1,0 +1,57 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    .buttons {
+        display: inline-block;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .btn:hover,
+    a:hover {
+        transform: scale(1.1);
+    }
+</style>
+<div class="contatiner">
+    <h2 class="text-center mb-5" style="color: #e55c28;">Booking Form of {{ worker.category_name }}</h2>
+    <div class="row align-items-center">
+        <div class="col col-3">
+
+        </div>
+        <div class="col col-6">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group text-center">
+                    <h6>Worker Name: {{ worker.user.name }}</h6>
+                </div>
+                <div class="form-group text-center">
+                    <h6>Experience: {{ worker.experience }}</h6>
+                </div>
+                <div class="form-group">
+                    {{form.booking_date|as_crispy_field}}
+                </div>
+                <div class="form-group">
+                    {{form.booking_time|as_crispy_field}}
+                </div>
+                <div class="form-group">
+                    {{form.problem_description|as_crispy_field}}
+                </div>
+                <div class="form-group">
+                    {{form.problem_picture|as_crispy_field}}
+                </div>
+                <div class="buttons" style="display: flex;">
+                    <input type="submit" class="btn btn-block" style="background-color: green;" value="Book">
+                    <a class="btn btn-block" style="background-color: red; color: black;"
+                        href="{% url 'service:service-list' %}">Cancle</a>
+                </div>
+
+            </form>
+        </div>
+        <div class="col col-3">
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
