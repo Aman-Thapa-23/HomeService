@@ -1,7 +1,7 @@
 {% extends 'dashboard.html' %}
 {% load static %}
 {% block content %}
-<style>
+<!-- <style>
     .worker-image {
     margin-bottom: 8px;
     height: 14rem;
@@ -30,20 +30,20 @@
     transform: scale(1.1);
     box-shadow: 5px 5px #3a3939;
   }
-</style>
+</style> -->
 
 <div class="container-fluid w-100">
   <h3 class="mt-5 mb-5 text-center" style="color: #e55c28;"><strong>{{ service_category.category_name }} list</strong></h3>
   <div class="row text-center">
           {% for worker in workers %}
-          <div class=" card worker" style="width: 17rem; margin:40px; margin-left: 60px;">
+          <div class="card worker">
               <img class="worker-image align-items-center" src="{{ worker.user.profile_image.url }}">
               <h4 class="text-center">{{ worker.user.name }}</h4>
               <span>{{ worker.user.email }}</span>
               <p>Contact: {{ worker.user.phone_number }}</p>
               <span>Address: {{ worker.user.address }}</span>
               <p class="card-text">Working Experience: {{ worker.experience }}</p>
-              <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-primary">Book</a>
+              <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-primary worker-booking">Book</a>
           </div>
           {% endfor %}
   </div>

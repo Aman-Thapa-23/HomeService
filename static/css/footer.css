@@ -5,6 +5,12 @@
             color: #646771;
             background-color: #16151a;
         }
+
+        .card-footer{
+            border: none;
+            background: transparent;
+
+        }
         
         ul{
             list-style-type: none;
@@ -46,4 +52,13 @@
         
         .divider{
             border-top: 2px solid rgba(189, 196, 203, 0.5);;
+        }
+        .footer-icon{
+            border-color: #e55c28;
+        }
+        .footer-icon:hover{
+            background-color: #e55c28;
+        }
+        .address:hover{
+            color: #e55c28;
         }

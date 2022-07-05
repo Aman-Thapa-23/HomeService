@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-  <title>{% block title %}Home Service{% endblock title %}</title>
+  <title>{% block title %}Ghar Sewa{% endblock title %}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/landing-page.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 </head>
 
 <body>
@@ -31,12 +32,12 @@
         {% endif %}
         {% if request.user.is_authenticated and request.user.is_customer %}
         <li>
-          <a href="#"><span class="fa fa-sticky-note"></span> My Booking</a>
+          <a href="{% url 'service:customer-booking-list' %}"><span class="fa fa-sticky-note"></span> My Booking</a>
         </li>
         {% endif %}
         {% if request.user.is_authenticated and request.user.is_worker %}
         <li>
-          <a href="#"><span class="fa fa-sticky-note"></span> Booking Requests</a>
+          <a href="{% url 'service:woker-booking-request-list' %}"><span class="fa fa-sticky-note"></span> Booking Requests</a>
         </li>
         {% endif %}
         {% if request.user.is_authenticated and request.user.is_worker %}
@@ -89,12 +90,12 @@
               {% endif %}
               {% if request.user.is_authenticated and request.user.is_customer %}
               <li class="nav-item">
-                <a class="nav-link" href="#">My Bookings</a>
+                <a class="nav-link" href="{% url 'service:customer-booking-list' %}">My Bookings</a>
               </li>
               {% endif %}
               {% if request.user.is_authenticated and request.user.is_worker %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Bookings Requests</a>
+                <a class="nav-link" href="{% url 'service:woker-booking-request-list' %}">Bookings Requests</a>
               </li>
               {% endif %}
             </ul>

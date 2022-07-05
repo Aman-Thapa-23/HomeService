@@ -1,22 +1,46 @@
-.navbar {
-    display: flex;
-    align-items: flex-end;
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    background-color: rgb(245, 245, 245);
-}
-.nav-item{
-text-align: justify;
-display: inline-block;
-font-size: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+
+*{
+  font-family: 'Nunito', sans-serif;
+  
 }
 
+.nav-body{
+    background-color: #f7f7f7;
+  }
+
+  .navbar {
+        display: flex;
+        align-items: flex-end;
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 10px;
+        background-color: #f7f7f7;
+}
+.nav-item{
+  text-align: justify;
+  display: inline-block;
+  font-size: 20px;
+  transition: 0.3s all ease-in-out;
+}
+.login{
+  margin-top: 5px;
+  background-color: #e55c28;
+}
+.register{
+  margin-top: 5px;
+  background-color: #e55c28;
+}
+.auth .nav-item a:hover {
+  color: black;
+}
 .nav-link{
-color: black;
+  color: black;
 }
 
 .nav-item a:hover{
-color: #e55c28;
+  color: #e55c28;
+  transform: scale(1.1);
 }

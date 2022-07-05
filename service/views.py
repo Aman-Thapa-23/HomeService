@@ -1,10 +1,10 @@
-from django import dispatch
 from django.shortcuts import render, redirect
 from authentication.models import WorkerCategory, Worker, CustomUser
 from django.views import View
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from .forms import BookingForm
 from .models import Booking
 
@@ -49,7 +49,7 @@ class BookingView(View):
 
     def post(self, request, pk):
         worker = Worker.objects.get(user__pk=pk)
-        form = BookingForm(request.POST, request.FILES, instance=worker)
+        form = BookingForm(request.POST, request.FILES)
         context = {
             'form': form,
             'worker':worker
@@ -62,6 +62,7 @@ class BookingView(View):
                 booking = form.save(commit=False)
                 booking.customer = request.user
                 booking.worker = worker
+                print(booking)
                 booking.save()
                 messages.success(request, f'your booking request is successfully sent to {worker.user.name}.')
                 return redirect('service:service-list')
@@ -86,21 +87,27 @@ class WorkerList(View):
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
 class CustomerBookingList(View):
     def get(self, request):
-        customer = CustomUser.objects.get(request.user.pk)
-        my_bookings = Booking.objects.filter(customer=customer)
+        my_bookings = Booking.objects.filter(customer=request.user).order_by('-booking_date')
+        paginator = Paginator(my_bookings, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         context = {
-            'my_bookings':my_bookings
+            'my_bookings':my_bookings,
+            'page_obj':page_obj
         }
-        return render(request, 'service/my_booking_list.html', context)
-
-    def post(self, request):
-        pass
+        return render(request, 'service/customer_booking_list.html', context)
 
 #customer list who booked the worker to specific worker
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
 class WorkerBookingRequestList(View):
     def get(self, request):
-        pass
-
-    def post(self, request):
-        pass
+        worker = Worker.objects.get(pk=request.user)
+        bookings_request = Booking.objects.filter(worker=worker).order_by('-booking_date')
+        paginator = Paginator(bookings_request, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context = {
+            'bookings_request':bookings_request,
+            'page_obj':page_obj
+        }
+        return render(request, 'service/worker_booking_request.html', context)

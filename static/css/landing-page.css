@@ -1,43 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+
+*{
+  font-family: 'Nunito', sans-serif;
+  
+}
+body{
+ background-color:#f7f7f7;
+ overflow-x: hidden;
+}
 .carousel-inner {
     height: 30rem;
 
   }
 
-  .carousel-image-one img {
-    margin-left: 16rem;
-    height: 20rem;
-    margin-bottom: 10rem;
+  .carousel-item img {
+    height: 600px;
   }
 
-  .carousel-image-two img {
-    margin-left: 20rem;
-    height: 20rem;
-    margin-bottom: 10rem;
+  .footer {
+    background-color: #16151a !important;
   }
 
-  .carousel-image-three img {
-    margin-left: 28rem;
-    align-items: center;
-    height: 20rem;
-    margin-bottom: 10rem;
+  .service-card {
+    border-radius: 10%;
+    border: 1px solid;
+    transition: 0.3 all ease-in-out;
+    width: 22rem;
+    height: 17rem;
+    margin: 13px;
+    margin-left: 50px;
+    margin-top: 20px;
+    /* box-shadow: rgb(0 0 0 / 10%) 0 10px 50px; */
   }
-
+  .service-card:hover{
+    transform: scaleY(1.1);
+    background-color: #e55c28;
+  }
   .service-image {
-    border-radius: 50%;
+    margin-top: 50px;
     transition: 0.3s all ease-in-out;
     margin-bottom: 8px;
   }
 
-  .service-image:hover {
-    transform: scale(1.2);
+  /* .service-image:hover {
+    transform:scaleY(1.1);
     background-color: #e55c28;
-  }
+  } */
 
   h2 {
     color: black;
-    font-family: sans-serif;
   }
 
-  .service {
-    margin-top: 20px;
+  .top-icons:hover{
+    background-color: #e55c28;
+    transform: scale(1.1);
   }

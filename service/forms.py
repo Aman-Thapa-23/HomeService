@@ -15,7 +15,7 @@ class TimePickerInput(forms.TimeInput):
 class BookingForm(forms.ModelForm):
     class Meta:
         model= Booking
-        fields = ('customer','worker','booking_date', 'booking_time', 'problem_description', 'problem_picture')
+        fields = ('booking_date', 'booking_time', 'problem_description', 'problem_picture')
 
         widgets = {
             'booking_date': DatePickerInput(),

@@ -1,21 +1,22 @@
 {% load static %}
+
 <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 <div class="container-xxl mt-5">
-    <div class="card">
+    <div class="card card-footer">
         <div class="row mb-4">
             <div class="col-md-4 col-sm-11">
                 <div class="footer-text pull-left">
                     <div class="d-flex mb-3">
-                        <img src="{% static 'images/FinalServiceLogo.png' %}" height="60px" width="100px" alt="">
+                        <img src="{% static 'images/Logo.png' %}" height="60px" width="90px" alt="">
                     </div>
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi non
                         pariatur
                         numquam animi nam at impedit odit nisi.</p>
                     <div class="social mt-2 mb-3">
-                        <i class="fab fa-facebook-square"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-twitter-square"></i>
-                        <i class="fab fa-linkedin"></i>
+                        <a class="footer-icon btn btn-outline-light" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="footer-icon btn btn-outline-light" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="footer-icon btn btn-outline-light" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="footer-icon btn btn-outline-light" href=""><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
@@ -30,12 +31,11 @@
                 </ul>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-4">
-                <h5 class="heading">Industries</h5>
+                <h5 class="heading">Address</h5>
                 <ul class="card-text">
-                    <li>Finance</li>
-                    <li>Public Sector</li>
-                    <li>Smart Office</li>
-                    <li>Retail</li>
+                    <p><i class="fa-solid fa-location-dot"></i><small class="ms-1 address"> Kumaripati, Lalitpur</small></p>
+                    <p><i class="fa-solid fa-phone"></i><small class="ms-1 address"> +977 9807572888</small></p>
+                    <p><i class="fa-solid fa-envelope"></i><small class="ms-1 address">homeservice@gmail.com</small></p>
                 </ul>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-4">

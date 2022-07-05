@@ -1,44 +1,11 @@
 {% load static %}
-<style>
-  .nav-body{
-    background-color: #f5f5f5;
-  }
-  .navbar {
-        display: flex;
-        align-items: flex-end;
-        padding: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top: 10px;
-        background-color: #f5f5f5;
-}
-.nav-item{
-  text-align: justify;
-  display: inline-block;
-  font-size: 20px;
-  transition: 0.3s all ease-in-out;
-}
-
-.nav-link{
-  color: black;
-}
-
-.nav-item a:hover{
-  color: #e55c28;
-  transform: scale(1.2);
-}
-
-
-
-</style>
 <div class="row nav-body">
   <div class="col-1">
 
   </div>
-  <div class="col-10">
+  <div class="col-11">
     <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="{% url 'landing-page' %}"><img src="{% static 'images/FinalServiceLogo.png' %}" style="height: 70px;width:120px;" alt="..." class="rounded">
-      </a>
+      <a class="navbar-brand" href="{% url 'landing-page' %}"><img src="{% static 'images/Logo.png' %}" style="height: 50px;width:75px;" class="rounded">Ghar Sewa</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -64,18 +31,17 @@
             <li class="nav-item m-2">
               <a class="nav-link" href="#">Contact</a>
             </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="{% url 'authentication:login' %}">Login</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="{% url 'authentication:user-type-choice' %}">Register</a>
-            </li>
+            <div class="auth">
+              <li class="nav-item m-2">
+                <a class="login btn btn-block" href="{% url 'authentication:login' %}">Login</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="register btn btn-block" href="{% url 'authentication:user-type-choice' %}">Register</a>
+              </li>
+          </div>
           </ul>
         </div>
       </nav>
-
-  </div>
-  <div class="col-1">
 
   </div>
 </div>

@@ -61,7 +61,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def __str__(self):
-        return f'{self.email}'
+        return f'{self.name}'
  
 
 class WorkerCategory(models.Model):
@@ -93,4 +93,4 @@ class Worker(models.Model):
 
 
     def __str__(self):
-        return f'{self.user}'
+        return f'{self.user.name}'
