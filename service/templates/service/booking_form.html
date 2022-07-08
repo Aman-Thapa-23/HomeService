@@ -1,4 +1,4 @@
-{% extends 'dashboard.html' %}
+{% extends 'dashboard2.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
@@ -14,8 +14,9 @@
         transform: scale(1.1);
     }
 </style> -->
+<!-- {% block title %}Booking Form{% endblock title %} -->
 <div class="contatiner">
-    <h2 class="text-center mb-5" style="color: #e55c28;">Booking Form of {{ worker.category_name }}</h2>
+    <!-- <h2 class="text-center mb-5" style="color: #e55c28;">Booking Form of {{ worker.category_name }}</h2> -->
     <div class="row align-items-center">
         <div class="col col-3">
 
@@ -30,7 +31,7 @@
                     <h6>Experience: {{ worker.experience }}</h6>
                 </div>
                 <div class="form-group">
-                    {{form.booking_date|as_crispy_field}}
+                    {{ form.booking_date|as_crispy_field}}
                 </div>
                 <div class="form-group">
                     {{form.booking_time|as_crispy_field}}
@@ -43,7 +44,7 @@
                 </div>
                 <div class="booking-form-buttons" style="display: flex;">
                     <input type="submit" class="btn btn-block btn-success m-2" value="Book">
-                    <a class="btn btn-block btn-danger m-1" href="{% url 'service:service-list' %}">Cancle</a>
+                    <a class="btn btn-block btn-danger m-2" href="{% url 'service:service-list' %}">Cancle</a>
                 </div>
 
             </form>

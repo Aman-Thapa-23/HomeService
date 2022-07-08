@@ -21,8 +21,7 @@ def landingPage(request):
 
 @login_required
 def LoggedInDashboard(request):
-    return render(request, 'dashboard.html')
-
+    return render(request, 'dashboard2.html')
 
 def about(request):
     return render(request, 'about_us.html')

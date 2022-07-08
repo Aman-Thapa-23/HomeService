@@ -1,9 +1,9 @@
-{% extends 'dashboard.html' %}
+{% extends 'dashboard2.html' %}
 {% load static %}
 {% block content %}
 
+<!-- {% block title %}Booking List{% endblock title %} -->
 <div class="container mt-4">
-    <h3 class="text-center">My Booking List</h3>
   <div class="container align-content-between">
     {% include 'messages.html' %}
     {% if my_bookings.count %}

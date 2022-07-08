@@ -1,51 +1,47 @@
-{% extends 'dashboard.html' %}
+{% extends 'dashboard2.html' %}
 {% load static %}
 {% block content %}
-<!-- <style>
-    .worker-image {
-    margin-bottom: 8px;
-    height: 14rem;
-    margin-top: 1rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    transition: 0.3s all ease-in-out;
-  }
-  .worker-image:hover{
-    transform: scale(1.1);
-    box-shadow: 5px 5px #3a3939;
-  }
 
-  h2 {
-    color: black;
-    font-family: sans-serif;
-  }
-
-  .worker {
-    margin-top: 20px;
-  }
-  a{
-    transition: 0.3s all ease-in-out;
-  }
-  a:hover{
-    transform: scale(1.1);
-    box-shadow: 5px 5px #3a3939;
-  }
-</style> -->
-
-<div class="container-fluid w-100">
-  <h3 class="mt-5 mb-5 text-center" style="color: #e55c28;"><strong>{{ service_category.category_name }} list</strong></h3>
-  <div class="row text-center">
-          {% for worker in workers %}
-          <div class="card worker">
-              <img class="worker-image align-items-center" src="{{ worker.user.profile_image.url }}">
-              <h4 class="text-center">{{ worker.user.name }}</h4>
-              <span>{{ worker.user.email }}</span>
-              <p>Contact: {{ worker.user.phone_number }}</p>
-              <span>Address: {{ worker.user.address }}</span>
-              <p class="card-text">Working Experience: {{ worker.experience }}</p>
-              <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-primary worker-booking">Book</a>
-          </div>
-          {% endfor %}
+{% block title %}Worker List{% endblock title %}
+<div class="container" id="content-types">
+  <div class="flex-row">
+    {% for worker in workers %}
+    <div class="col-xl-4">
+      <img src="{{ worker.user.profile_image.url }}" class="card-img-top align-items-center" height="350">
+      <div class="card-body">
+        <h5 class="card-title text-center">{{ worker.user.name }}</h5>
+        <ul class="list-group">
+          <li class="list-group-item">Email: {{ worker.user.email}}</li>
+          <li class="list-group-item">Contact: {{ worker.user.phone_number}}</li>
+          <li class="list-group-item">Address: {{ worker.user.address}}</li>
+          <li class="list-group-item">Working Experience: {{ worker.experience }}</li>
+        </ul>
+        <div class="card-footer d-flex justify-content-center">
+          <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-light-primary">Book</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
+
+<!-- <div class="container-fluid w-100">
+  <h3 class="mt-5 mb-5 text-center" style="color: #e55c28;"><strong>{{ service_category.category_name }} list</strong>
+  </h3>
+  <div class="row text-center">
+    {% for worker in workers %}
+    <div class="card worker">
+      <div class="col-4 col-lg-4">
+        <img class="worker-image align-items-center" src="{{ worker.user.profile_image.url }}">
+        <h4 class="text-center">{{ worker.user.name }}</h4>
+        <span>{{ worker.user.email }}</span>
+        <p>Contact: {{ worker.user.phone_number }}</p>
+        <span>Address: {{ worker.user.address }}</span>
+        <p class="card-text">Working Experience: {{ worker.experience }}</p>
+        <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-primary worker-booking">Book</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div> -->
 {% endblock content %}

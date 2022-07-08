@@ -1,4 +1,4 @@
-{% extends "dashboard.html" %}
+{% extends "dashboard2.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
@@ -8,10 +8,9 @@
         height: 200px;
     }
 </style>
+<!-- {% block title %}Profile{% endblock title %} -->
 
 <div class="container mt-md-4">
-    <h1 style="color: #e55c28;">Your Profile</h1>
-    <hr>
     <div class="row">
         <!-- left column -->
         <div class="col-md-3">
@@ -23,7 +22,7 @@
         </div>
 
         <!-- edit form column -->
-        <div class="col-md-9 personal-info">
+        <div class="col-md-6 personal-info">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% include 'messages.html' %}
