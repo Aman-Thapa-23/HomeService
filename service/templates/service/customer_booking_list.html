@@ -36,7 +36,6 @@
           <tr>
             <th>Booking For</th>
             <th>Woker Name</th>
-            <th>Worker Email</th>
             <th>Worker Contact</th>
             <th>Worker Address</th>
             <th>Booking Date</th>
@@ -50,12 +49,11 @@
           <tr>
             <td>{{ booking.worker.category_name }}</td>
             <td>{{ booking.worker.user.name }}</td>
-            <td>{{ booking.worker.user.email }}</td>
             <td>{{ booking.worker.user.phone_number }}</td>
             <td>{{ booking.worker.user.address }}</td>
             <td>{{ booking.booking_date }}</td>
             <td>{{ booking.booking_time }}</td>
-            <td>{{ booking.accepted_status }}</td>
+            <td>{{ booking.status }}</td>
             <td>{{ booking.is_complete }}</td>
           </tr>
           {% endfor %}

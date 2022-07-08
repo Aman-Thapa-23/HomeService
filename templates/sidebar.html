@@ -50,7 +50,7 @@
 
                 {% if request.user.is_authenticated and request.user.is_worker %}
                 <li class="sidebar-item {% if title == 'Requests List' %}active{% endif %}">
-                    <a href="{% url 'service:woker-booking-request-list' %}"><span class="fas fa-list-ul"></span>Booking Requests List</a>
+                    <a href="{% url 'service:woker-booking-request-list' %}" class='sidebar-link'><i class="fas fa-list-ul"></i><span>Booking Requests List</span></a>
                 </li>
                 {% endif %}
             </ul>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from authentication.models import WorkerCategory, Worker, CustomUser
 from django.views import View
 from django.contrib import messages
@@ -110,3 +110,24 @@ class WorkerBookingRequestList(View):
             'page_obj':page_obj
         }
         return render(request, 'service/worker_booking_request.html', context)
+
+
+def BookingStatusView(request):
+    if request.is_ajax():
+        id=request.GET.get('id')
+        st=get_object_or_404(Booking,pk=id)
+        print(st.status)
+        if st.status == False:
+            st.status=True
+            # notice = get_object_or_404(Notice, status=True)
+            # notice.status=False#make previous inactive
+            # notice.save()
+            st.save()
+        else:
+            st.status=False
+            st.save()
+
+        booking_data = Booking.objects.all()
+
+    '''Due to   design fluctuation, I am rendering to notice_list.html'''
+    return render(request, 'admin/notices/notice_list.html', {'notices':booking_data})
