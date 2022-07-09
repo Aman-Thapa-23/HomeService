@@ -55,12 +55,12 @@
               <td>{{ work_request.is_complete }}</td>
               <td>
                 {% if work_request.status == 'Pending' %}
-                  <a class="btn btn-block btn-success data-change" data-id="{{ work_request.pk }}" href="">Accept</a>
-                  <a class="btn btn-block btn-danger" href="">Reject</a>
+                  <a  class="btn btn-block btn-success status" id="{{ work_request.pk }}">Accept</a>
+                  <a  class="btn btn-block btn-danger status" id="{{ work_request.pk }}">Reject</a>
                 {% elif work_request.status == 'Accepted' %}
-                  <span>Accepted</span>
+                  <span class = "btn btn-success">Accepted</span>
                 {% elif work_request.status == 'Rejected' %}
-                <span>Rejected</span>
+                <span class = "btn btn-danger">Rejected</span>
                 {% endif %}
               </td>
             </tr>
@@ -95,21 +95,26 @@
 </div>
 
 
+
+
+{% endblock content %}
+
+{% block javascript %}
 <script>
   $(document).ready(function () {
 
-    $('a.data-change').click(function (event) {
-      alert('helosdcbhasdcbhadcb');
+    $('.status').click(function (event) {
       event.preventDefault();
-      var id = $(this).data('id');
+      var booking_id = $(this).attr('id');
+      var status = $(this).text();
+      console.log(booking_id)
 
       $.ajax({
         url: "{% url 'service:booking-status' %}",
-        data: { 'id': id },
+        data: { 'booking_id': booking_id,'status':status },
         success: function (data) {
 
-          $('#noticepopup').html("");
-          $('#noticepopup').html(data);
+          window.location.reload();
         },
         error: function () {
           alert("something went wrong")
@@ -126,5 +131,4 @@
     });
   });
 </script>
-
-{% endblock content %}
+{% endblock javascript %}
