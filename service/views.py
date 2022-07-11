@@ -113,21 +113,17 @@ class WorkerBookingRequestList(View):
 
 
 def BookingStatusView(request):
-    if request.is_ajax():
-        id=request.GET.get('id')
-        st=get_object_or_404(Booking,pk=id)
-        print(st.status)
-        if st.status == False:
-            st.status=True
-            # notice = get_object_or_404(Notice, status=True)
-            # notice.status=False#make previous inactive
-            # notice.save()
-            st.save()
-        else:
-            st.status=False
-            st.save()
-
-        booking_data = Booking.objects.all()
-
-    '''Due to   design fluctuation, I am rendering to notice_list.html'''
-    return render(request, 'admin/notices/notice_list.html', {'notices':booking_data})
+    booking_id = request.GET.get('booking_id')
+    coming_status = request.GET.get('status')
+    booking = Booking.objects.get(pk=booking_id)
+    if  coming_status == 'Accept':
+        booking.status = 'Accepted'
+        booking.save()
+        messages.success(request, f'Your booking request is accepted by {booking.worker.user.name}.')
+        return redirect('service:customer-booking-list')
+    if  coming_status == 'Reject':
+        booking.status = 'Rejected'
+        booking.save()
+        messages.success(request, f'Your booking request is rejected by {booking.worker.user.name}.')
+        return redirect('service:customer-booking-list')
+    return render(request, 'service/worker_booking_request.html')

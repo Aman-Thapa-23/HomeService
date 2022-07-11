@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from django import conf
 from django.contrib import messages
 import os
 from decouple import config
