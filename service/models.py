@@ -2,7 +2,7 @@ from django.db import models
 from authentication.models import CustomUser, Worker
 from django.utils import timezone
 
-# Create your models here.
+# Create your models here.kltb
 
 class Booking(models.Model):
     STATUS =(
