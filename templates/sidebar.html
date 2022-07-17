@@ -30,9 +30,9 @@
         <div class="sidebar-menu">
             <ul class="menu">           
                 <li class="sidebar-item {% if title == 'Dashboard' %}active{% endif %}">
-                    <a href="{% url 'dashboard' %}" class='sidebar-link'>
+                    <a href="{% url 'service:profile-statistics' %}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
+                        <span>Profile Statistics</span>
                     </a>
                 
                 {% if request.user.is_authenticated and request.user.is_customer %}

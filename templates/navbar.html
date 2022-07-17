@@ -22,10 +22,9 @@
                 Services
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Plumbing</a>
-                <a class="dropdown-item" href="#">Painting</a>
-                <a class="dropdown-item" href="#">Electrician</a>
-                <a class="dropdown-item" href="#">Carpentry</a>
+                {% for service in service_list %}
+                <p class="dropdown-item">{{ service.category_name }}</p>
+                {% endfor %}
               </div>
             </li>
             <li class="nav-item m-2">

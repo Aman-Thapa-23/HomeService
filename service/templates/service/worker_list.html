@@ -2,20 +2,19 @@
 {% load static %}
 {% block content %}
 
-{% block title %}Worker List{% endblock title %}
+
+<!-- {% block title %}Worker List{% endblock title %} -->
 <div class="container" id="content-types">
-  <div class="flex-row">
+  <div class="d-flex flex-wrap">
     {% for worker in workers %}
-    <div class="col-xl-4">
-      <img src="{{ worker.user.profile_image.url }}" class="card-img-top align-items-center" height="350">
+    <div class="col-3 m-4 ms-5">
+      <img src="{{ worker.user.profile_image.url }}" class="card-img-top align-items-center" height="330">
       <div class="card-body">
         <h5 class="card-title text-center">{{ worker.user.name }}</h5>
-        <ul class="list-group">
-          <li class="list-group-item">Email: {{ worker.user.email}}</li>
-          <li class="list-group-item">Contact: {{ worker.user.phone_number}}</li>
-          <li class="list-group-item">Address: {{ worker.user.address}}</li>
-          <li class="list-group-item">Working Experience: {{ worker.experience }}</li>
-        </ul>
+          <p>Email: {{ worker.user.email}}</p>
+          <span>Contact: {{ worker.user.phone_number}}</span>
+          <p>Address: {{ worker.user.address}}</p>
+          <span>Working Experience: {{ worker.experience }}</span>
         <div class="card-footer d-flex justify-content-center">
           <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-light-primary">Book</a>
         </div>

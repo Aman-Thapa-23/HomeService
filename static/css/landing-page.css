@@ -28,8 +28,8 @@ body{
     transition: 0.3 all ease-in-out;
     width: 22rem;
     height: 17rem;
-    margin: 13px;
-    margin-left: 50px;
+    margin: 10px;
+    margin-left: 40px;
     margin-top: 20px;
     /* box-shadow: rgb(0 0 0 / 10%) 0 10px 50px; */
   }
