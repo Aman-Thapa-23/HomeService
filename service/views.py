@@ -1,3 +1,5 @@
+from multiprocessing import context
+from django import forms
 from django.shortcuts import get_object_or_404, render, redirect
 from authentication.models import WorkerCategory, Worker, CustomUser
 from django.views import View
@@ -5,8 +7,8 @@ from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from .forms import BookingForm
-from .models import Booking
+from .forms import BookingForm, WorkerAvailabilityForm
+from .models import Booking, WorkerAvailability
 from django.http import JsonResponse
 from django.db.models import Q
 
@@ -14,7 +16,6 @@ import json
 import datetime
 
 # Create your views here.
-
 
 def landingPage(request):
     service_list = WorkerCategory.objects.all()
@@ -26,7 +27,7 @@ def landingPage(request):
 
 @login_required
 def LoggedInDashboard(request):
-    return render(request, 'dashboard2.html')
+    return redirect('service:profile-statistics')
 
 
 def about(request):
@@ -42,31 +43,31 @@ def ServiceList(request):
 
 
 # Customer search box from worker list
-@login_required
-def SearchWorker(request):
-    if request.method == "POST":
-        search_str = json.loads(request.body).get('searchText')
-        worker = Booking.objects.filter(worker__icontains=search_str, customer=request.user) | Booking.objects.filter(worker__user__address__icontains=search_str,  customer=request.user) | Booking.objects.filter(
-            status__icontains=search_str,  customer=request.user)
-        data = worker.values()
+# @login_required
+# def SearchWorker(request):
+#     if request.method == "POST":
+#         search_str = json.loads(request.body).get('searchText')
+#         worker = Booking.objects.filter(worker__icontains=search_str, customer=request.user) | Booking.objects.filter(worker__user__address__icontains=search_str,  customer=request.user) | Booking.objects.filter(
+#             status__icontains=search_str,  customer=request.user)
+#         data = worker.values()
 
-        return JsonResponse(list(data), safe=False)
+#         return JsonResponse(list(data), safe=False)
 
 # WOrker search for customer list
 
 
-@login_required
-def SearchCustomer(request):
-    if request.method == "POST":
-        search_str = json.loads(request.body).get('searchText')
-        customer = Booking.objects.filter(
-            Q(customer__icontains=search_str) &
-            Q(customer__phone_number__icontains=search_str) &
-            Q(customer__address__icontains=search_str)
-        )
-        data = customer.values()
+# @login_required
+# def SearchCustomer(request):
+#     if request.method == "POST":
+#         search_str = json.loads(request.body).get('searchText')
+#         customer = Booking.objects.filter(
+#             Q(customer__icontains=search_str) &
+#             Q(customer__phone_number__icontains=search_str) &
+#             Q(customer__address__icontains=search_str)
+#         )
+#         data = customer.values()
 
-        return JsonResponse(list(data), safe=False)
+#         return JsonResponse(list(data), safe=False)
 
 
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
@@ -96,7 +97,6 @@ class BookingView(View):
                 booking = form.save(commit=False)
                 booking.customer = request.user
                 booking.worker = worker
-                print(booking)
                 booking.save()
                 messages.success(
                     request, f'your booking request is successfully sent to {worker.user.name}.')
@@ -112,9 +112,11 @@ class WorkerList(View):
     def get(self, request, pk):
         service_category = WorkerCategory.objects.get(pk=pk)
         workers = Worker.objects.filter(category_name=service_category)
+        worker_availablility = WorkerAvailability.objects.filter(worker=workers)
         context = {
             'workers': workers,
-            'service_category': service_category
+            'service_category': service_category,
+            'worker_availablility':worker_availablility
         }
         return render(request, 'service/worker_list.html', context)
 
@@ -152,6 +154,7 @@ class WorkerBookingRequestList(View):
         return render(request, 'service/worker_booking_request.html', context)
 
 
+@login_required
 def BookingStatusView(request):
     booking_id = request.GET.get('booking_id')
     coming_status = request.GET.get('status')
@@ -201,3 +204,39 @@ def UserStatistics(request):
             'pending':pending
         }
         return render(request, 'service/profile_statistics.html', context)
+
+
+
+
+@method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
+class WorkerAvailabilityView(View):
+    def get(self, request):
+        form = WorkerAvailabilityForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'service/worker_availability_form.html', context)
+    
+    def post(self, request):
+        form = WorkerAvailabilityForm(request.POST)
+        context = {
+            'form': form
+        }
+        if form.is_valid():
+            date_from = form.cleaned_data['date_from']
+            date_to = form.cleaned_data['date_to']
+
+            if date_from.replace(tzinfo=None) <= datetime.datetime.now() and date_to.replace(tzinfo=None) > datetime.datetime.now():
+                WorkerAvailability.unavailable_status = True
+    
+                available_form = form.save(commit=False)
+                available_form.worker = request.user
+                available_form.save()
+                messages.success(request, f'you are now unavailable in the worker list. Customer cannot book you.')
+                return redirect('service:profile-statistics')
+            
+            # if datetime.datetime.now() < date_from and datetime.datetime.now() > date_to:
+            #     WorkerAvailability.unavailable_status = False
+            #     return redirect('service:profile-statistics')
+
+        return render(request,  'service/worker_availability_form.html', context)

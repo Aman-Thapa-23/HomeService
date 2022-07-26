@@ -27,3 +27,9 @@ class Booking(models.Model):
     class Meta:
         ordering = ['-booking_date']
  
+
+class WorkerAvailability(models.Model):
+    worker = models.OneToOneField(Worker, on_delete=models.CASCADE)
+    date_from = models.DateTimeField()
+    date_to = models.DateTimeField()
+    unavailable_status = models.BooleanField('Make Unavailable', default=False)

@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 from service.views import landingPage,LoggedInDashboard, about
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
     path('admin/', admin.site.urls),
     path('authentication/', include('authentication.urls', namespace='authentication')),
     path('', landingPage, name='landing-page'),

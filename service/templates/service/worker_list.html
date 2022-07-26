@@ -5,18 +5,90 @@
 
 <!-- {% block title %}Worker List{% endblock title %} -->
 <div class="container" id="content-types">
-  <div class="d-flex flex-wrap">
+  <div class=" card--container">
     {% for worker in workers %}
-    <div class="col-3 m-4 ms-5">
-      <img src="{{ worker.user.profile_image.url }}" class="card-img-top align-items-center" height="330">
-      <div class="card-body">
-        <h5 class="card-title text-center">{{ worker.user.name }}</h5>
+    <div class="">
+      <style>
+        .card--container {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          column-gap: 1.4rem;
+          row-gap: 1.6rem;
+        }
+
+        .img-container {
+          width: 100%;
+          height: 200px;
+          background-size: 100%;
+          background-position: 17% 33%;
+
+          border-top-right-radius: 5px !important;
+          border-top-left-radius: 5px !important;
+        }
+
+        .img-container img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .custom__card {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+
+        .card-body {
+          display: flex;
+          flex-direction: column;
+          padding: 1.5rem .8rem !important;
+        }
+
+        .card-footer a {
+          align-self: flex-end;
+          width: 100%;
+        }
+
+
+        .card-footer {
+          flex: 1;
+          border: none;
+          padding: 0;
+          margin-top: .8rem;
+        }
+
+        .card-body h5,
+        .card-body p,
+        .card-body span {
+          font-size: 1rem !important;
+          text-align: start !important;
+        }
+      </style>
+      <div class="custom__card">
+
+        <div class="img-container" style="background-image: url('{{ worker.user.profile_image.url }}')">
+          <!-- <img src="{{ worker.user.profile_image.url }}" class="card-img-top align-items-center"> -->
+
+        </div>
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ worker.user.name }}</h5>
           <p>Email: {{ worker.user.email}}</p>
           <span>Contact: {{ worker.user.phone_number}}</span>
           <p>Address: {{ worker.user.address}}</p>
           <span>Working Experience: {{ worker.experience }}</span>
-        <div class="card-footer d-flex justify-content-center">
-          <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-light-primary">Book</a>
+          {% if worker_availablility.unavailable_status == False %}
+          <p>Availablity: Available now</p>
+          {% elif worker_availablility.unavailable_status == True %}
+          <p>Availablity: Unavailable now</p>
+          {% endif %}
+          <div class="card-footer d-flex justify-content-center">
+            {% if worker_availablility.unavailable_status == True %}
+            <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-light-primary disabled">Book</a>
+            {% elif worker_availablility.unavailable_status == False %}
+            <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-light-primary">Book</a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>

@@ -53,6 +53,17 @@
                     <a href="{% url 'service:woker-booking-request-list' %}" class='sidebar-link'><i class="fas fa-list-ul"></i><span>Booking Requests List</span></a>
                 </li>
                 {% endif %}
+                <li class="sidebar-item">
+                    <a href="" class='sidebar-link'><i class="fas fa-key"></i><span>Password Change</span></a>
+                </li>
+                {% if request.user.is_authenticated and request.user.is_worker %}
+                <li class="sidebar-item">
+                    <a href="{% url 'service:worker-availability-form' %}" class='sidebar-link'><i class="fas fa-clock"></i><span>Unvailability Form</span></a>
+                </li>
+                {% endif %}
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{% url 'authentication:logout' %}"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>
+                </li>
             </ul>
         </div>
     </div>

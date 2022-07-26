@@ -24,17 +24,21 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-body px-3 py-4-5">
-                    <div class="row justify-content-center">
-                        <div class="stats-icon purple mt-3 mb-3">
-                            <i class="iconly-boldProfile"></i>
+                    <div class="row justify-content-lg-start ms-lg-5">
+                        <div class="row">
+                            <div class="col-6 stats-icon purple mt-3 mb-3">
+                                <i class="iconly-boldProfile"></i>
+                            </div>
+                            <div class="col-6 mt-3 ms-5 align-content-end">
+                                {% if request.user.is_customer %}
+                                <h3 class="font-extrabold mb-0">{{ my_bookings.count }}</h3>
+                                {% elif request.user.is_worker %}
+                                <h3 class="font-extrabold mb-0">{{ booking_requests.count }}</h3>
+                                {% endif %}
+                            </div>
                         </div>
                         <div class="row">
                             <h4 class="text-muted text-center font-semibold">Total Bookings</h6>
-                            {% if request.user.is_customer %}
-                            <h6 class="font-extrabold mb-0">{{ my_bookings.count }}</h6>
-                            {% elif request.user.is_worker %}
-                            <h6 class="font-extrabold mb-0">{{ booking_requests.count }}</h6>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -43,17 +47,21 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-body px-3 py-4-5">
-                    <div class="row justify-content-center">
-                        <div class="stats-icon green mt-3 mb-3">
-                            <i class="iconly-boldPlus"></i>
+                    <div class="row justify-content-lg-start ms-lg-5">
+                        <div class="row">
+                            <div class="col-6 stats-icon green mt-3 mb-3">
+                                <i class="iconly-boldPlus"></i>
+                            </div>
+                            <div class="col-6 mt-3 ms-5 align-content-end">
+                                {% if request.user.is_customer %}
+                                <h3 class="font-extrabold mb-0">{{ accepted.count }}</h3>
+                                {% elif request.user.is_worker %}
+                                <h3 class="font-extrabold mb-0">{{ accepted.count }}</h3>
+                                {% endif %}
+                            </div>
                         </div>
                         <div class="row">
                             <h4 class="text-muted text-center font-semibold">Total Accepted</h4>
-                            {% if request.user.is_customer %}
-                            <h6 class="font-extrabold justify-content-center mb-0">{{ accepted.count }}</h6>
-                            {% elif request.user.is_worker %}
-                            <h6 class="font-extrabold justify-content-center mb-0">{{ accepted.count }}</h6>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -64,18 +72,22 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-body px-3 py-4-5">
-                    <div class="row justify-content-center">
-                        <div class="stats-icon bg-warning mt-3 mb-3">
-                            <i class="iconly-boldTime-Circle"></i>
+                    <div class="row justify-content-lg-start ms-lg-5">
+                        <div class="row">
+                            <div class="col-6 stats-icon bg-warning mt-3 mb-3">
+                                <i class="iconly-boldTime-Circle"></i>
+                            </div>
+                            <div class="col-6 mt-3 ms-5 align-content-end">
+                                {% if request.user.is_customer %}
+                                <h3 class="font-extrabold mb-0">{{ pending.count }}</h3>
+                                {% elif request.user.is_worker %}
+                                <h3 class="font-extrabold mb-0">{{ pending.count }}</h3>
+                                {% endif %}
+                            </div>
                         </div>
                     <div class="row">
                         <h4 class="text-muted text-center font-semibold">Total Pending</h4>
-                            {% if request.user.is_customer %}
-                            <h6 class="font-extrabold justify-content-center mb-0">{{ pending.count }}</h6>
-                            {% elif request.user.is_worker %}
-                            <h6 class="font-extrabold justify-content-center mb-0">{{ pending.count }}</h6>
-                            {% endif %}
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -83,19 +95,23 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-body px-3 py-4-5">
-                    <div class="row justify-content-center">
-                        <div class="stats-icon red mt-3 mb-3">
-                            <i class="iconly-boldDelete"></i>
-                        </div>
-
+                    <div class="row justify-content-lg-start ms-lg-5">
                         <div class="row">
-                            <h6 class="text-muted text-center font-semibold">Total Rejected</h6>
-                            {% if request.user.is_customer %}
-                            <h6 class="font-extrabold justify-content-center mb-0">{{ rejected.count }}</h6>
-                            {% elif request.user.is_worker %}
-                            <h6 class="font-extrabold justify-content-center mb-0">{{ rejected.count }}</h6>
-                            {% endif %}
+                            <div class="col-6 stats-icon red mt-3 mb-3">
+                                <i class="iconly-boldDelete"></i>
+                            </div>
+                            <div class="col-6 mt-3 ms-5 align-content-end">
+                                {% if request.user.is_customer %}
+                                <h3 class="font-extrabold mb-0">{{ rejected.count }}</h3>
+                                {% elif request.user.is_worker %}
+                                <h3 class="font-extrabold mb-0">{{ rejected.count }}</h3>
+                                {% endif %}
+                            </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <h4 class="text-muted text-center font-semibold">Total Rejected</h4>
+                    </div>
                     </div>
                 </div>
             </div>

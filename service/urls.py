@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import BookingView, WorkerList, ServiceList, UserStatistics ,CustomerBookingList ,WorkerBookingRequestList, BookingStatusView, SearchWorker, SearchCustomer
+# from .views import SearchWorker, SearchCustomer
+from .views import BookingView, WorkerList, ServiceList, UserStatistics ,CustomerBookingList ,WorkerBookingRequestList, BookingStatusView, WorkerAvailabilityView
 from django.views.decorators.csrf import csrf_exempt
 
 app_name='service'
@@ -12,6 +13,8 @@ urlpatterns = [
     path('woker-booking-request-list', WorkerBookingRequestList.as_view(), name='woker-booking-request-list'),
     path('booking-status', BookingStatusView, name='booking-status'),
     path('profile-statistics', UserStatistics, name='profile-statistics'),
-    path('search-worker', csrf_exempt(SearchWorker), name='search-worker'),
-    path('search-customer', csrf_exempt(SearchWorker), name='search-customer'),
+    # path('search-worker', csrf_exempt(SearchWorker), name='search-worker'),
+    # path('search-customer', csrf_exempt(SearchWorker), name='search-customer'),
+
+    path('worker-availability-form', WorkerAvailabilityView.as_view(), name='worker-availability-form'),
 ]

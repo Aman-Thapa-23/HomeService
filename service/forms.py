@@ -1,5 +1,5 @@
 from django import forms
-from .models import Booking
+from .models import Booking, WorkerAvailability
 
 # date picker widget
 class DatePickerInput(forms.DateInput):
@@ -11,7 +11,10 @@ class TimePickerInput(forms.TimeInput):
     input_type = 'time'
     input_formats=['%H:%M %p']
 
-
+class DateTimePickerInput(forms.DateTimeInput):
+    input_type= 'datetime-local'
+    input_formats=['%m/%d/%y %H:%M %p']
+    
 class BookingForm(forms.ModelForm):
     class Meta:
         model= Booking
@@ -26,3 +29,13 @@ class BookingForm(forms.ModelForm):
         #     'booking_date': forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker'}),format='%Y-%m-%d'),
         #     'booking_time': forms.DateField(widget=forms.DateInput(attrs={'class': 'timepicker'}),format="%H:%M")
         # }
+
+
+class WorkerAvailabilityForm(forms.ModelForm):
+    class Meta:
+        model = WorkerAvailability
+        fields = ('date_from', 'date_to')
+        widgets = {
+            'date_from': DateTimePickerInput(),
+            'date_to': DateTimePickerInput()
+        }

@@ -1,11 +1,8 @@
-from contextlib import nullcontext
-from email.policy import default
-from pyexpat import model
-from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+
 # Create your models here.
 
 

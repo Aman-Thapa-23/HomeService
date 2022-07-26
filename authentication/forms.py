@@ -41,7 +41,6 @@ class WorkerUpdateForm(forms.ModelForm):
         model = Worker
         fields = ('experience','id_proof', 'id_image')
 
-
 class CustomerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser    
