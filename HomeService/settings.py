@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-from django import conf
 from django.contrib import messages
 import os
 from decouple import config
@@ -134,7 +133,7 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'authentication:login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -197,3 +196,9 @@ JET_THEMES = [
         'title': 'Light Gray'
     }
 ]
+
+#Email Sending to User
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = config('EMAIL_PORT')

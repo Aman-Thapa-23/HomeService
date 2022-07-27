@@ -27,7 +27,32 @@ def landingPage(request):
 
 @login_required
 def LoggedInDashboard(request):
-    return redirect('service:profile-statistics')
+    if request.user.is_customer:
+        my_bookings = Booking.objects.filter(
+                customer=request.user)
+        accepted = Booking.objects.filter(customer=request.user, status="Accepted")
+        rejected = Booking.objects.filter(customer=request.user, status ="Rejected")
+        pending = Booking.objects.filter(customer=request.user, status ="Pending")
+        context = {
+        'my_bookings':my_bookings,
+        'accepted':accepted,
+        'rejected':rejected,
+        'pending':pending
+        }
+    if request.user.is_worker:
+        worker = Worker.objects.get(pk=request.user)
+        booking_requests = Booking.objects.filter(
+            worker=worker)
+        accepted = Booking.objects.filter(worker=worker, status="Accepted")
+        rejected = Booking.objects.filter(worker=worker, status ="Rejected")
+        pending = Booking.objects.filter(worker=worker, status ="Pending")
+        context = {
+            'booking_requests':booking_requests,
+            'accepted':accepted,
+            'rejected':rejected,
+            'pending':pending
+        }
+    return render(request, 'service/profile_statistics.html', context)
 
 
 def about(request):
@@ -211,11 +236,12 @@ def UserStatistics(request):
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
 class WorkerAvailabilityView(View):
     def get(self, request):
-        form = WorkerAvailabilityForm()
-        context = {
-            'form': form
-        }
-        return render(request, 'service/worker_availability_form.html', context)
+        if request.user.is_worker:
+            form = WorkerAvailabilityForm()
+            context = {
+                'form': form
+            }
+            return render(request, 'service/worker_availability_form.html', context)
     
     def post(self, request):
         form = WorkerAvailabilityForm(request.POST)
@@ -227,11 +253,10 @@ class WorkerAvailabilityView(View):
             date_to = form.cleaned_data['date_to']
 
             if date_from.replace(tzinfo=None) <= datetime.datetime.now() and date_to.replace(tzinfo=None) > datetime.datetime.now():
-                WorkerAvailability.unavailable_status = True
-    
-                available_form = form.save(commit=False)
-                available_form.worker = request.user
-                available_form.save()
+                unavailable_form = form.save(commit=False)
+                unavailable_form.worker = request.user
+                unavailable_form.unavailable_status = True
+                unavailable_form.save()
                 messages.success(request, f'you are now unavailable in the worker list. Customer cannot book you.')
                 return redirect('service:profile-statistics')
             

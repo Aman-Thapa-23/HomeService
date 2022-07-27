@@ -47,7 +47,6 @@
                             <input class="form-check-input" type="checkbox" style="background-color:  #4B76F1;" value="" id="form1Example3" checked />
                             <label class="form-check-label" for="form1Example3"> Remember me </label>
                         </div>
-                        <a href="#!">Forgot password?</a>
                     </div>
                     
                     <!-- Submit button -->
@@ -66,8 +65,9 @@
                         <i class="fab fa-twitter me-2"></i>Continue with Twitter</a> -->
                 </form>
                 <div class="container mt-4 ms-4 mb-lg-4" style="text-align: center;">
+                    <span class="">Forgot Password? <a href="{% url 'password_reset' %}"> Reset Here</a></span><br>
                     <span class="">Don't have an account?<a href="{% url 'authentication:user-type-choice' %}"> Sign Up</a></span><br>
-                  </div>
+                </div>
             </div>
         </div>
     </div>

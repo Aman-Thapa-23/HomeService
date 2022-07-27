@@ -28,12 +28,15 @@
         </div>
         <hr>
         <div class="sidebar-menu">
-            <ul class="menu">           
+            <ul class="menu">  
+                {% if request.user.is_authenticated %}         
                 <li class="sidebar-item {% if title == 'Dashboard' %}active{% endif %}">
                     <a href="{% url 'service:profile-statistics' %}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Profile Statistics</span>
                     </a>
+                </li>
+                {% endif %}
                 
                 {% if request.user.is_authenticated and request.user.is_customer %}
                 </li class="sidebar-item {% if title == 'Service' %}active{% endif %}">
@@ -53,17 +56,24 @@
                     <a href="{% url 'service:woker-booking-request-list' %}" class='sidebar-link'><i class="fas fa-list-ul"></i><span>Booking Requests List</span></a>
                 </li>
                 {% endif %}
+
+                {% if request.user.is_authenticated %}
                 <li class="sidebar-item">
-                    <a href="" class='sidebar-link'><i class="fas fa-key"></i><span>Password Change</span></a>
+                    <a href="{% url 'authentication:change-password' %}" class='sidebar-link'><i class="fas fa-key"></i><span>Password Change</span></a>
                 </li>
+                {% endif %}
+
                 {% if request.user.is_authenticated and request.user.is_worker %}
                 <li class="sidebar-item">
                     <a href="{% url 'service:worker-availability-form' %}" class='sidebar-link'><i class="fas fa-clock"></i><span>Unvailability Form</span></a>
                 </li>
                 {% endif %}
+
+                {% if request.user.is_authenticated %}
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{% url 'authentication:logout' %}"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>
