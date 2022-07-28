@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.db import transaction
 
 from authentication.models import CustomUser, Worker, WorkerCategory
@@ -57,3 +57,11 @@ class CustomerSignUpForm(UserCreationForm):
         super(CustomerSignUpForm, self).__init__(*args, **kwargs)
         for field_name in ('name', 'email', 'password1', 'password2'):
             self.fields[field_name].help_text = ''
+
+
+class UserPasswordChangeForm(PasswordChangeForm):
+     def __init__(self, *args, **kwargs):
+        super(PasswordChangeForm, self).__init__(*args, **kwargs)
+        for field_name in ('old_password', 'new_password1', 'new_password2'):
+            self.fields[field_name].help_text = ''
+    

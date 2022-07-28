@@ -68,7 +68,11 @@
                     <a href="{% url 'service:worker-availability-form' %}" class='sidebar-link'><i class="fas fa-clock"></i><span>Unvailability Form</span></a>
                 </li>
                 {% endif %}
-
+                {% if request.user.is_authenticated and request.user.is_customer %}
+                <li class="sidebar-item">
+                    <a href="{% url 'rating:my-boooked-worker' %}" class='sidebar-link'><i class="fas fa-clipboard-check"></i><span>Booked Worker</span></a>
+                </li>
+                {% endif %}
                 {% if request.user.is_authenticated %}
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{% url 'authentication:logout' %}"><i class="fas fa-sign-out-alt"></i><span>Sign out</span></a>

@@ -1,6 +1,3 @@
-from ast import Pass
-from email import message
-from django import views
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
@@ -14,10 +11,9 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
 
 from .models import CustomUser, Worker, WorkerCategory
-from .forms import WorkerSignUpForm, CustomerSignUpForm, WorkerUpdateForm, CustomUserUpdateForm
+from .forms import WorkerSignUpForm, CustomerSignUpForm, WorkerUpdateForm, CustomUserUpdateForm, UserPasswordChangeForm
 from .utils import accout_activation_token
 import threading
 # Create your views here.
@@ -257,13 +253,13 @@ class CustomerProfile(View):
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
 class ChangePasswordView(View):
     def get(self, request):
-        form = PasswordChangeForm(request.user)
+        form = UserPasswordChangeForm(request.user)
         context = {
             'form':form
         }
         return render(request, 'authentication/change_password.html', context)
     def post(self, request):
-        form = PasswordChangeForm(request.user, request.POST)
+        form = UserPasswordChangeForm(request.user, request.POST)
         context = {
             'form':form
         }

@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'authentication',
     'crispy_forms',
     'service',
+    'channels',
+    'notification',
+    'rating',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +83,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'HomeService.wsgi.application'
+ASGI_APPLICATION = 'HomeService.asgi.application'
 
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 

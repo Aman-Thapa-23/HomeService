@@ -11,6 +11,7 @@ from .forms import BookingForm, WorkerAvailabilityForm
 from .models import Booking, WorkerAvailability
 from django.http import JsonResponse
 from django.db.models import Q
+from notification.utils import create_notification
 
 import json
 import datetime
@@ -123,6 +124,7 @@ class BookingView(View):
                 booking.customer = request.user
                 booking.worker = worker
                 booking.save()
+                create_notification(request, sender=request.user, receiver=worker, message='Booking request')
                 messages.success(
                     request, f'your booking request is successfully sent to {worker.user.name}.')
                 return redirect('service:service-list')
@@ -137,11 +139,11 @@ class WorkerList(View):
     def get(self, request, pk):
         service_category = WorkerCategory.objects.get(pk=pk)
         workers = Worker.objects.filter(category_name=service_category)
-        worker_availablility = WorkerAvailability.objects.filter(worker=workers)
+        # worker_availablility = WorkerAvailability.objects.filter(worker=workers)
         context = {
             'workers': workers,
             'service_category': service_category,
-            'worker_availablility':worker_availablility
+            # 'worker_availablility':worker_availablility
         }
         return render(request, 'service/worker_list.html', context)
 
@@ -152,12 +154,8 @@ class CustomerBookingList(View):
     def get(self, request):
         my_bookings = Booking.objects.filter(
             customer=request.user).order_by('-booking_date')
-        paginator = Paginator(my_bookings, 7)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
         context = {
             'my_bookings': my_bookings,
-            'page_obj': page_obj
         }
         return render(request, 'service/customer_booking_list.html', context)
 
@@ -169,12 +167,8 @@ class WorkerBookingRequestList(View):
         worker = Worker.objects.get(pk=request.user)
         booking_requests = Booking.objects.filter(
             worker=worker).order_by('-booking_date')
-        paginator = Paginator(booking_requests, 7)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
         context = {
             'booking_requests': booking_requests,
-            'page_obj': page_obj
         }
         return render(request, 'service/worker_booking_request.html', context)
 

@@ -4,9 +4,26 @@
 
 
 <!-- {% block title %}Worker List{% endblock title %} -->
+<div class="page-heading">
+    <div class="page-title">
+      <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+          <h3>My Booked Worker</h3>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+          <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">My Booked Worker</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+</div>
 <div class="container" id="content-types">
   <div class=" card--container">
-    {% for worker in workers %}
+    {% for my_booked_worker in my_booked_workers %}
     <div class="">
       <style>
         .card--container {
@@ -67,18 +84,18 @@
       </style>
       <div class="custom__card">
 
-        <div class="img-container" style="background-image: url('{{ worker.user.profile_image.url }}')">
+        <div class="img-container" style="background-image: url('{{ my_booked_worker.worker.user.profile_image.url }}')">
           <!-- <img src="{{ worker.user.profile_image.url }}" class="card-img-top align-items-center"> -->
 
         </div>
         <div class="card-body">
-          <h5 class="card-title text-center">{{ worker.user.name }}</h5>
-          <p>Email: {{ worker.user.email}}</p>
-          <span>Contact: {{ worker.user.phone_number}}</span>
-          <p>Address: {{ worker.user.address}}</p>
-          <span>Working Experience: {{ worker.experience }}</span>
+          <h5 class="card-title text-center">{{ my_booked_worker.worker.user.name }}</h5>
+          <p>Email: {{ my_booked_worker.worker.user.email}}</p>
+          <span>Booked For: {{ my_booked_worker.worker.category_name}}</span>
+          <p>Booked Date: {{ my_booked_worker.booking_date}}</p>
+          <span>Booked Time: {{ my_booked_worker.booking_time }}</span>
           <div class="card-footer d-flex justify-content-center">
-            <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-light-primary">Book</a>
+            <a href="" class="btn btn-light-primary">Give Review and Rate</a>
           </div>
         </div>
       </div>
@@ -86,24 +103,4 @@
     {% endfor %}
   </div>
 </div>
-
-<!-- <div class="container-fluid w-100">
-  <h3 class="mt-5 mb-5 text-center" style="color: #e55c28;"><strong>{{ service_category.category_name }} list</strong>
-  </h3>
-  <div class="row text-center">
-    {% for worker in workers %}
-    <div class="card worker">
-      <div class="col-4 col-lg-4">
-        <img class="worker-image align-items-center" src="{{ worker.user.profile_image.url }}">
-        <h4 class="text-center">{{ worker.user.name }}</h4>
-        <span>{{ worker.user.email }}</span>
-        <p>Contact: {{ worker.user.phone_number }}</p>
-        <span>Address: {{ worker.user.address }}</span>
-        <p class="card-text">Working Experience: {{ worker.experience }}</p>
-        <a href="{% url 'service:worker-booking-form' worker.pk %}" class="btn btn-primary worker-booking">Book</a>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</div> -->
 {% endblock content %}

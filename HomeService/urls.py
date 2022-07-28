@@ -17,8 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from service.views import landingPage, about
-from service.views import LoggedInDashboard
+from service.views import landingPage, about, LoggedInDashboard 
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -30,6 +29,7 @@ urlpatterns = [
     path('dashboard/', LoggedInDashboard, name='dashboard'),
     path('about', about, name='about'),
     path('service/', include('service.urls', namespace='service')),
+    path('rating/', include('rating.urls', namespace='rating')),
 
     #forgot password
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='authentication/password_reset/password_reset.html'), name='password_reset'), 
