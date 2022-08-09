@@ -1,7 +1,12 @@
+from dataclasses import fields
 from django import forms
 from .models import Booking, WorkerAvailability
 
 # date picker widget
+
+
+
+
 class DatePickerInput(forms.DateInput):
     input_type = 'date'
     input_formats=['%m/%d/%y']

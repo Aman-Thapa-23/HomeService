@@ -72,17 +72,4 @@
         </div>
     </div>
 </section>
-<script>
-    let ws_scheme = window.location.protocol == "https:" ? "wss://" : "ws://";
-
-    let endpoint = ws_scheme + window.location.host + '/ws/notification/1/';
-
-    var socket = new WebSocket(endpoint);
-
-    socket.onmessage = async function (e) {
-    let data = JSON.parse(e.data);
-    console.log("message", data);
-    };
-
-</script>
 {% endblock content %}

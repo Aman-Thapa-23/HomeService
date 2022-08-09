@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Dashboard{% endblock title %}</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -124,7 +125,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header text-center">
-                                    {% if service_category %}
+                                    <!-- {% if service_category %}
                                     <h4>{{ service_category.category_name }}</h4>
                                     {% endif %}
                                     {% if services %}
@@ -141,7 +142,7 @@
                                     {% endif %}
                                     {% if booking_form %}
                                     <h4>Booking Form</h4>
-                                    {% endif %}
+                                    {% endif %} -->
                                 </div>
                                 <div class="card-body">
                                     {% block content %}
@@ -191,5 +192,31 @@
     {% block javascript %}
     {% endblock javascript %}
 </body>
+<script>
+    let ws_scheme = window.location.protocol == "https:" ? "wss://" : "ws://";
 
+    let endpoint = ws_scheme + window.location.host + '/ws/notification/1/';
+
+    var socket = new WebSocket(endpoint);
+
+    socket.onmessage = async function (e) {
+    // let abc = e.payload
+    // console.log(abc)
+    let data = JSON.parse(e.data);
+    console.log("message", data);
+    // console.log("aman",data.payload.count)
+    // payload = data.payload
+    // a = JSON.stringify(payload)
+    // console.log("a", JSON.parse);
+    // console.log("message", data);
+    // console.log('hello')
+    // consolelog()
+
+    
+
+
+
+    };
+
+</script>
 </html>

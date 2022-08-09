@@ -1,7 +1,63 @@
 {% extends 'dashboard2.html' %}
 {% load static %}
 {% block content %}
+<style>
+  .card--container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1.4rem;
+    row-gap: 1.6rem;
+  }
 
+  .img-container {
+    width: 100%;
+    height: 200px;
+    background-size: 100%;
+    background-position: 17% 33%;
+
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+  }
+
+  .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .custom__card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem .8rem !important;
+  }
+
+  .card-footer a {
+    align-self: flex-end;
+    width: 100%;
+  }
+
+
+  .card-footer {
+    flex: 1;
+    border: none;
+    padding: 0;
+    margin-top: .8rem;
+  }
+
+  .card-body h5,
+  .card-body p,
+  .card-body span {
+    font-size: 1rem !important;
+    text-align: start !important;
+  }
+</style>
 
 <!-- {% block title %}Worker List{% endblock title %} -->
 <div class="page-heading">
@@ -25,63 +81,6 @@
   <div class=" card--container">
     {% for my_booked_worker in my_booked_workers %}
     <div class="">
-      <style>
-        .card--container {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          column-gap: 1.4rem;
-          row-gap: 1.6rem;
-        }
-
-        .img-container {
-          width: 100%;
-          height: 200px;
-          background-size: 100%;
-          background-position: 17% 33%;
-
-          border-top-right-radius: 5px !important;
-          border-top-left-radius: 5px !important;
-        }
-
-        .img-container img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .custom__card {
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-        }
-
-        .card-body {
-          display: flex;
-          flex-direction: column;
-          padding: 1.5rem .8rem !important;
-        }
-
-        .card-footer a {
-          align-self: flex-end;
-          width: 100%;
-        }
-
-
-        .card-footer {
-          flex: 1;
-          border: none;
-          padding: 0;
-          margin-top: .8rem;
-        }
-
-        .card-body h5,
-        .card-body p,
-        .card-body span {
-          font-size: 1rem !important;
-          text-align: start !important;
-        }
-      </style>
       <div class="custom__card">
 
         <div class="img-container" style="background-image: url('{{ my_booked_worker.worker.user.profile_image.url }}')">
@@ -95,7 +94,7 @@
           <p>Booked Date: {{ my_booked_worker.booking_date}}</p>
           <span>Booked Time: {{ my_booked_worker.booking_time }}</span>
           <div class="card-footer d-flex justify-content-center">
-            <a href="" class="btn btn-light-primary">Give Review and Rate</a>
+            <a href="{% url 'rating:worker-rating' my_booked_worker.worker.user.pk %}" class="btn btn-light-primary">Give Review and Rate</a>
           </div>
         </div>
       </div>

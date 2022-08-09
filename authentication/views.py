@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.utils.decorators import method_decorator
@@ -188,7 +189,7 @@ class LoginView(View):
 
 
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
-class LogoutView(View):
+class LogoutView(View, LoginRequiredMixin):
     def get(self, request):
         logout(request)
         messages.success(request, f'You have been logged out.')
@@ -196,7 +197,7 @@ class LogoutView(View):
 
 
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
-class WorkerProfile(View):
+class WorkerProfile(View, LoginRequiredMixin):
     def get(self, request, pk):
         worker = Worker.objects.get(user__pk=pk)
         cu_form = CustomUserUpdateForm(instance=request.user)
@@ -229,7 +230,7 @@ class WorkerProfile(View):
 
 
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
-class CustomerProfile(View):
+class CustomerProfile(View, LoginRequiredMixin):
     def get(self, request):
         cu_form = CustomUserUpdateForm(instance=request.user)
         context = {
@@ -251,7 +252,7 @@ class CustomerProfile(View):
 
 
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
-class ChangePasswordView(View):
+class ChangePasswordView(View, LoginRequiredMixin):
     def get(self, request):
         form = UserPasswordChangeForm(request.user)
         context = {

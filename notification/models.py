@@ -2,7 +2,6 @@ from email import message
 from django.db import models
 from django.dispatch import receiver
 from authentication.models import CustomUser
-import notification
 
 # Create your models here.
 

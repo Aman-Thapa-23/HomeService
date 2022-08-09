@@ -34,3 +34,13 @@ class WorkerAvailability(models.Model):
     date_from = models.DateTimeField()
     date_to = models.DateTimeField()
     unavailable_status = models.BooleanField('Make Unavailable', default=False)
+
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} has contact us.'

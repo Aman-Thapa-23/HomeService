@@ -1,5 +1,6 @@
 from multiprocessing import context
 from django import forms
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect
 from authentication.models import WorkerCategory, Worker, CustomUser
 from django.views import View
@@ -8,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from .forms import BookingForm, WorkerAvailabilityForm
-from .models import Booking, WorkerAvailability
+from .models import Booking, Contact, WorkerAvailability
 from django.http import JsonResponse
 from django.db.models import Q
 from notification.utils import create_notification
@@ -17,6 +18,21 @@ import json
 import datetime
 
 # Create your views here.
+
+class ContactView(View):
+    def get(self, request):
+        return render(request, 'contact_us.html')
+    
+    def post(self, request):
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        message = request.POST['message']
+        contactform = Contact.objects.create(first_name=first_name, last_name=last_name, email=email, message= message)
+        contactform.save()
+        messages.success(request, 'Thank you for your concern.')
+        return redirect('landing-page')
+
 
 def landingPage(request):
     service_list = WorkerCategory.objects.all()
@@ -97,7 +113,7 @@ def ServiceList(request):
 
 
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
-class BookingView(View):
+class BookingView(View, LoginRequiredMixin):
     def get(self, request, pk):
         worker = Worker.objects.get(user__pk=pk)
         form = BookingForm(instance=worker)
@@ -135,7 +151,7 @@ class BookingView(View):
 
 
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
-class WorkerList(View):
+class WorkerList(View, LoginRequiredMixin):
     def get(self, request, pk):
         service_category = WorkerCategory.objects.get(pk=pk)
         workers = Worker.objects.filter(category_name=service_category)
@@ -150,7 +166,7 @@ class WorkerList(View):
 
 # worker list booked by customer for specific customer
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
-class CustomerBookingList(View):
+class CustomerBookingList(View, LoginRequiredMixin):
     def get(self, request):
         my_bookings = Booking.objects.filter(
             customer=request.user).order_by('-booking_date')
@@ -162,7 +178,7 @@ class CustomerBookingList(View):
 
 # customer list who booked the worker to specific worker
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
-class WorkerBookingRequestList(View):
+class WorkerBookingRequestList(View, LoginRequiredMixin):
     def get(self, request):
         worker = Worker.objects.get(pk=request.user)
         booking_requests = Booking.objects.filter(
@@ -228,7 +244,7 @@ def UserStatistics(request):
 
 
 @method_decorator(login_required(login_url='/authentication/login'), name='dispatch')
-class WorkerAvailabilityView(View):
+class WorkerAvailabilityView(View, LoginRequiredMixin):
     def get(self, request):
         if request.user.is_worker:
             form = WorkerAvailabilityForm()
