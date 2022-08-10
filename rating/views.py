@@ -96,3 +96,23 @@ class WorkerRatingView(View, LoginRequiredMixin):
 #         form.save()
 #         return JsonResponse({'success':'true', 'rate': rate}, safe=False)
 #     return JsonResponse({'success':'false'})
+
+
+
+class CustomerRatingList(View):
+    def get(self, request):
+        review = ReviewWorker.objects.filter(customer=request.user)
+        context = {
+            'review':review
+        }
+        return render(request, 'rating/customer_rating_list.html', context)
+
+
+class WorkerRatingList(View):
+    def get(self, request, pk):
+        worker = Worker.objects.get(user__pk=pk)
+        review = ReviewWorker.objects.filter(worker=worker)
+        context = {
+            'review':review
+        }
+        return render(request, 'rating/worker_rating_list.html', context)

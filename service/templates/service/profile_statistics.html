@@ -112,11 +112,40 @@
                     <div class="row">
                         <h4 class="text-muted text-center font-semibold">Total Rejected</h4>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% if request.user.is_worker %}
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h4>Booking Request Summary</h4>
+            </div>
+            <div class="card-body">
+                <div id="bar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/worker_summary.js' %}"></script>
+{% endif %}
+{% if request.user.is_customer %}
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h4>Booking Summary</h4>
+            </div>
+            <div class="card-body">
+                <div id="bar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/customer_summary.js' %}"></script>
+{% endif %}
 {% endblock statistics %}
 <!-- Dashboard stastistics end -->

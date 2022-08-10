@@ -88,19 +88,10 @@
                                 <li>
                                     <h6 class="dropdown-header">{{ request.user.name }}</h6>
                                 </li>
-                                {% if request.user.is_authenticated and request.user.is_worker %}
-                                <li><a class="dropdown-item"
-                                        href="{% url 'authentication:worker-profile' request.user.pk %}"><i
-                                            class="icon-mid bi bi-person me-2"></i> My
-                                        Profile</a></li>
-                                {% endif %}
-                                {% if request.user.is_authenticated and request.user.is_customer %}
-                                <li><a class="dropdown-item" href="{% url 'authentication:cutomer-profile' %}"><i
-                                            class="icon-mid bi bi-person me-2"></i> My
-                                        Profile</a></li>
-                                {% endif %}
-                                <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                        Settings</a></li>
+                                <li>
+                                    <p class="text-lg-center">{{request.user.phone_number}}</p>
+                                    <p class="text-lg-center">{{request.user.email}}</p>
+                                </li>
                                 <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="{% url 'authentication:logout' %}"><i
@@ -178,7 +169,6 @@
 
     <script src='https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js'></script>
     <script src="{% static 'assets/js/app.js' %}"></script>
-
     <script src="{% static 'assets/js/extensions/datatables.js' %}"></script>
     <script src="{% static 'assets/js/extensions/toastify.js' %}"></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
