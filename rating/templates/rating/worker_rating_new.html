@@ -155,6 +155,7 @@
       <form class="review-form" action="" method="post">
         {% csrf_token %}
         {{ form.comment|as_crispy_field}}
+        <label for="">Give Star Rating</label>
         <div class="rating rating2">
           <a href="#5" class="star" onclick="myFunction(5);" title="Give 5 stars" data-value="5">★</a>
           <a href="#4" class="star" onclick="myFunction(4);" title="Give 4 stars" data-value="4">★</a>
@@ -164,7 +165,7 @@
         </div>
       </form>
       <p class="confirmBox"></p>
-      <h4 class="text-center">When any star is clicked, rating will post.</h4>
+      <h6 class="text-center">Note: When any star is clicked, rating will automatically post.</h6>
     </div>
   </div>
   <div class="col-1">

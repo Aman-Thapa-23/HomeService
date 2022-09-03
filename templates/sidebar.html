@@ -88,10 +88,10 @@
                 {% endif %}
 
                 {% if request.user.is_authenticated and request.user.is_worker %}
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                     <a href="{% url 'service:worker-availability-form' %}" class='sidebar-link'><i
                             class="fas fa-clock"></i><span>Unvailability Form</span></a>
-                </li>
+                </li> -->
                 {% endif %}
                 {% if request.user.is_authenticated and request.user.is_customer %}
                 <li class="sidebar-item">

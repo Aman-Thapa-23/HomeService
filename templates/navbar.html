@@ -15,16 +15,19 @@
               <a class="nav-link m-2" href="{% url 'landing-page' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item m-2">
-              <a class="nav-link" href="{% url 'about' %}">About Us</a>
+              <a class="nav-link" href="{% url 'about' %}">About us</a>
             </li>
-            <li class="nav-item m-2 dropdown">
+            <li class="nav-item dropdown m-2">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Services
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                {% for service in service_list %}
-                <p class="dropdown-item">{{ service.category_name }}</p>
-                {% endfor %}
+                <a href="{% url 'authentication:login' %}" class="dropdown-item">Painter</a>
+                <a href="{% url 'authentication:login' %}" class="dropdown-item">Plumber</a>
+                <a href="{% url 'authentication:login' %}" class="dropdown-item">Electrician</a>
+                <a href="{% url 'authentication:login' %}" class="dropdown-item">Carpenter</a>
+                <a href="{% url 'authentication:login' %}" class="dropdown-item">Gardener</a>
+                <a href="{% url 'authentication:login' %}" class="dropdown-item">Home Cleaner</a>
               </div>
             </li>
             <li class="nav-item m-2">
@@ -32,10 +35,10 @@
             </li>
             <div class="auth">
               <li class="nav-item m-2">
-                <a class="login btn btn-block" href="{% url 'authentication:login' %}">Login</a>
+                <a class="login btn btn-block" style="color: white;" href="{% url 'authentication:login' %}">Login</a>
               </li>
               <li class="nav-item m-2">
-                <a class="register btn btn-block" href="{% url 'authentication:user-type-choice' %}">Register</a>
+                <a class="register btn btn-block" style="color: white;" href="{% url 'authentication:user-type-choice' %}">Register</a>
               </li>
           </div>
           </ul>

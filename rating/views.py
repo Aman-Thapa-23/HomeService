@@ -5,6 +5,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from service.models import Booking
 from .models import ReviewWorker
+from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from authentication.models import WorkerCategory, Worker, CustomUser
@@ -19,6 +20,7 @@ from django.contrib import messages
 class MyBookedWorker(View, LoginRequiredMixin):
     def get(self, request):
         my_booked_workers = Booking.objects.filter(customer=request.user).order_by('-booking_date')
+        
         context = {
             'my_booked_workers': my_booked_workers,
         }
@@ -101,9 +103,13 @@ class WorkerRatingView(View, LoginRequiredMixin):
 
 class CustomerRatingList(View):
     def get(self, request):
-        review = ReviewWorker.objects.filter(customer=request.user)
+        reviews = ReviewWorker.objects.filter(customer=request.user)
+        paginator = Paginator(reviews, 2)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         context = {
-            'review':review
+            'reviews':reviews,
+            'page_obj':page_obj
         }
         return render(request, 'rating/customer_rating_list.html', context)
 
@@ -111,8 +117,12 @@ class CustomerRatingList(View):
 class WorkerRatingList(View):
     def get(self, request, pk):
         worker = Worker.objects.get(user__pk=pk)
-        review = ReviewWorker.objects.filter(worker=worker)
+        reviews = ReviewWorker.objects.filter(worker=worker)
+        paginator = Paginator(reviews, 2)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         context = {
-            'review':review
+            'reviews':reviews,
+            'page_obj':page_obj
         }
         return render(request, 'rating/worker_rating_list.html', context)

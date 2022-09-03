@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/pages/toastify.css' %}">
 
 
+
 </head>
 
 <body>
@@ -46,7 +47,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <div class="col-9 col-lg-9">
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">
+                            <!-- <ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">
                                 <li class="nav-item dropdown me-3">
                                     <a class="nav-link active dropdown-toggle text-gray-600" href="#"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,10 +57,10 @@
                                         <li>
                                             <h6 class="dropdown-header">Notifications</h6>
                                         </li>
-                                        <li><a class="dropdown-item">No notification available</a></li>
+                                        <li><a class="dropdown-item show-message">No notification available</a></li>
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                         <div class="dropdown col-3 col-lg-3">
                             <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
@@ -192,8 +193,13 @@
     socket.onmessage = async function (e) {
     // let abc = e.payload
     // console.log(abc)
-    let data = JSON.parse(e.data);
-    console.log("message", data);
+    
+    let {payload} = JSON.parse(e.data);
+    console.log(typeof payload);
+    // var name = name.replace(/[^a-zA-Z0-9 ]/g, "");
+    console.log("message", payload.split('message'));
+    // console.log(message)
+    // console.log(payload[`${message}`]);
     // console.log("aman",data.payload.count)
     // payload = data.payload
     // a = JSON.stringify(payload)
@@ -201,11 +207,7 @@
     // console.log("message", data);
     // console.log('hello')
     // consolelog()
-
-    
-
-
-
+    document.querySelector('.show-message').textContent = payload.split('message')[1].replace(/[^a-zA-Z0-9 ]/g, "")
     };
 
 </script>

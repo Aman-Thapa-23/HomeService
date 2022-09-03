@@ -6,7 +6,7 @@ from authentication.models import CustomUser, Worker
 class ReviewWorker(models.Model):
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    comment = models.TextField('Review',max_length=300)
+    comment = models.TextField('Review', null=False, blank=False)
     rate = models.IntegerField(default=0, validators=[
         MaxValueValidator(5),
         MinValueValidator(0)

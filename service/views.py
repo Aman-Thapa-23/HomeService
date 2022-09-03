@@ -140,7 +140,7 @@ class BookingView(View, LoginRequiredMixin):
                 booking.customer = request.user
                 booking.worker = worker
                 booking.save()
-                create_notification(request, sender=request.user, receiver=worker, message='Booking request')
+                create_notification(request, sender=request.user, receiver=worker, message='New booking request')
                 messages.success(
                     request, f'your booking request is successfully sent to {worker.user.name}.')
                 return redirect('service:service-list')
@@ -185,24 +185,29 @@ class WorkerBookingRequestList(View, LoginRequiredMixin):
             worker=worker).order_by('-booking_date')
         context = {
             'booking_requests': booking_requests,
+            'worker':worker
         }
         return render(request, 'service/worker_booking_request.html', context)
 
 
 @login_required
 def BookingStatusView(request):
+    worker = request.GET.get('worker_id')
+    customer = request.GET.get('customer_id')
     booking_id = request.GET.get('booking_id')
     coming_status = request.GET.get('status')
     booking = Booking.objects.get(pk=booking_id)
     if coming_status == 'Accept':
         booking.status = 'Accepted'
         booking.save()
+        # create_notification(request, sender=worker, receiver=customer, message= f'Booking request accepted by {booking.worker.user.name}')
         messages.success(
             request, f'Your booking request is accepted by {booking.worker.user.name}.')
         return redirect('service:customer-booking-list')
     if coming_status == 'Reject':
         booking.status = 'Rejected'
         booking.save()
+        # create_notification(request, sender=worker, receiver=customer, message= f'Booking request rejected by {booking.worker.user.name}')
         messages.success(
             request, f'Your booking request is rejected by {booking.worker.user.name}.')
         return redirect('service:customer-booking-list')

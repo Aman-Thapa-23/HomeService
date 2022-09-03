@@ -21,8 +21,8 @@ from service.views import landingPage, about, LoggedInDashboard
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
+#     path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
+#     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
     path('admin/', admin.site.urls),
     path('authentication/', include('authentication.urls', namespace='authentication')),
     path('', landingPage, name='landing-page'),

@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from authentication.models import CustomUser, Worker
 from django.utils import timezone
@@ -6,6 +7,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.kltb
 
 class Booking(models.Model):
+    COMPLETE_STATUS = (
+        ('Incomplete', 'Incomplete'),
+        ('Complete', 'Complete')
+    )
     STATUS =(
         ('Pending', 'Pending'),
         ('Accepted', 'Accepted'),
@@ -18,7 +23,7 @@ class Booking(models.Model):
     problem_description = models.TextField()
     problem_picture = models.ImageField(null=True, blank=True, upload_to='problem_picture')
     status = models.CharField(choices=STATUS, default='Pending', max_length=20)
-    is_complete = models.BooleanField(default=False)
+    is_complete = models.CharField(default='Incomplete', choices=COMPLETE_STATUS, max_length=20)
     accepted_date = models.DateTimeField(auto_now_add=False, null=True, blank=True)
 
     def __str__(self):

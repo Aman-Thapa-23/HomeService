@@ -19,6 +19,19 @@ from .utils import accout_activation_token
 import threading
 # Create your views here.
 
+# import requests
+
+# url = "https://khalti.com/api/v2/payment/verify/"
+# payload = {
+#   "token": "QUao9cqFzxPgvWJNi9aKac",
+#   "amount": 1000
+# }
+# headers = {
+#   "Authorization": "Key test_secret_key_f59e8b7d18b4499ca40f68195a846e9b"
+# }
+
+# response = requests.post(url, payload, headers = headers)
+
 class UserTypesRegistration(View):
     def get(self, request):
         return render(request, 'authentication/user_type_choose.html')
