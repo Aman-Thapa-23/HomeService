@@ -3,4 +3,6 @@ from .models import ReviewWorker
 
 # Register your models here.
 
-admin.site.register(ReviewWorker)
+@admin.register(ReviewWorker)
+class ReviewWorkerAdmin(admin.ModelAdmin):
+    list_display= ['customer', 'worker', 'rate', 'comment', 'review_date']
