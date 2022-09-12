@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ghar-sewa.herokuapp.com/', '127.0.0.1' ]
 
 
 # Application definition
@@ -93,8 +93,11 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_USER_PASSWORD'),
+        'HOST': config('DB_HOST'),
     }
 }
 
@@ -170,8 +173,11 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-#Email Sending to User
+
+EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True                           
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_TEST_USER')
+EMAIL_HOST_USER = os.environ.get('EMAIL_TEST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_TEST_PASS')

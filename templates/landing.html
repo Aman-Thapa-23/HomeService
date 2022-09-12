@@ -181,7 +181,7 @@
     <div class="container-xxl py-lg-5">
       <h3 class="mt-5 mb-5 text-center" style="color: #4B76F1"><strong>BOOK NOW</strong></h3>
       <div class="row text-center m-4">
-        <div class="d-flex flex-wrap">
+        <div class="d-flex flex-wrap m-5">
           {% for service_list in service_list %}
           <div class="card service-card" style="background-color: #f7f7f7;">
             <a href="{% url 'service:worker-list' service_list.id %}">
