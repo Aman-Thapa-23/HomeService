@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+
+*{
+  font-family: 'Nunito', sans-serif;
+  
+}
+body{
+ background-color:#f7f7f7;
+ overflow-x: hidden;
+}
+.carousel-inner {
+    height: 30rem;
+
+  }
+
+  .carousel-item img {
+    height: 600px;
+  }
+
+  .footer {
+    background-color: #16151a !important;
+  }
+
+  .service-card {
+    border-radius: 10%;
+    border: 1px solid;
+    transition: 0.3 all ease-in-out;
+    width: 20rem;
+    height: 17rem;
+    margin: 10px;
+    margin-left: 40px;
+    margin-top: 20px;
+    /* box-shadow: rgb(0 0 0 / 10%) 0 10px 50px; */
+  }
+  .service-card:hover{
+    transform: scaleY(1.1);
+    background-color: #e55c28;
+  }
+  .service-image {
+    margin-top: 50px;
+    transition: 0.3s all ease-in-out;
+    margin-bottom: 8px;
+  }
+
+  /* .service-image:hover {
+    transform:scaleY(1.1);
+    background-color: #e55c28;
+  } */
+
+  h2 {
+    color: black;
+  }
+
+  .top-icons:hover{
+    background-color: #e55c28;
+    transform: scale(1.1);
+  }
