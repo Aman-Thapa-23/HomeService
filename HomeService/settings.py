@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['ghar-sewa.herokuapp.com/', '127.0.0.1' ]
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app' ]
 
 
 # Application definition
@@ -149,7 +149,7 @@ LOGIN_URL = 'authentication:login'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 # print(STATIC_ROOT)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+
+*{
+  font-family: 'Nunito', sans-serif;
+}
+
+  .dashboard-service-card {
+    border-radius: 10%;
+    border: 1px solid;
+    transition: 0.3 all ease-in-out;
+    width: 18rem;
+    height: 17rem;
+    margin: 13px;
+    margin-left: 50px;
+    margin-top: 20px;
+    /* box-shadow: rgb(0 0 0 / 10%) 0 10px 50px; */
+  }
+  .dashboard-service-card:hover{
+    transform: scaleY(1.1);
+    background-color: #e55c28;
+  }
+  .service-image {
+    margin-top: 50px;
+    transition: 0.3s all ease-in-out;
+    margin-bottom: 8px;
+  }
+
+  .worker{
+    width: 18rem; 
+    margin:40px;
+    margin-left: 60px;
+  }
+  .worker-image {
+    margin-bottom: 8px;
+    height: 14rem;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    transition: 0.3s all ease-in-out;
+  }
+  .worker-image:hover{
+    transform: scale(1.1);
+  }
+
+  .worker{
+    margin-top: 20px;
+  }
+  .worker-booking{
+    transition: 0.3s all ease-in-out;
+  }
+  .worker-booking:hover{
+    transform: scale(1.1);
+  }
+
+  .booking-form-buttons{
+    display: inline-block;
+    align-items: center;
+    justify-items: center;
+    transition: 0.3 all ease-in-out;
+  }
+  .btn:hover, a:hover {
+    transform: scale(1);
+}
